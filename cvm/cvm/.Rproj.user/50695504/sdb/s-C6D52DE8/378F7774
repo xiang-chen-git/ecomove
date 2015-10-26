@@ -1,0 +1,16 @@
+{
+    "contents" : "#' Obtain 1D complete S.zz matrix\n#' \n#' Takes vector of times T and parameters nu, tau, v0, and returns the zz portion of the covariance matrix.\n#' @usage getcov.zz(T, tau, v0=nu)\n#' getS.ZZ(T, tau, v0=nu)\n#' @param T vector of times (length n).\n#' @param tau characteristic time scale.\n#' @return either a 2n x 2n VV-VZ-ZZ matrix or n x n ZZ matrix. \n#' \n#' @aliases getcov.zz\n#' @examples\n#' require(gridExtra)\n#' T <- cumsum(rexp(10))\n#' # separated into Sigma_vv, Sigma_vz (assymetric), and Sigma_zz\n#' Sigma <- Matrix(getSigma.VZ(T, nu=2, tau=5, v0=2))\n#' i1 <- image(Sigma[1:10,1:10], main=\"V-V\", colorkey=TRUE, useRaster=TRUE)\n#' i2 <- image(Sigma[11:20,1:10], main=\"V-Z\", colorkey=TRUE, useRaster=TRUE)\n#' i3 <- image(Sigma[11:20,11:20], main=\"Z-Z\", colorkey=TRUE, useRaster=TRUE)\n#' grid.arrange(i1,i2,i3,ncol=3)\n#' # And the complete matrix (log transformed):\n#' image(log(Sigma), colorkey=TRUE, main=\"log(Sigma)\")\n\n\n# getcov.zz <- function(t1, t2, tau, t0 = 0) {\n#   eps1 <- exp(-(t1 - t0)/tau)\n#   kappa <- exp(-(t2 - t1)/tau)\n#   VarV <- (2/pi) * (1 - eps1^2)\n#   VarZ <- 4 * tau^2/pi * ((t1 - t0)/tau - 2 * (1 - eps1) + (1 - eps1^2)/2)\n#   CovVZ <- (2 * tau/pi) * (1 - exp(-t1/tau))^2\n#   return(VarZ + tau * (1 - kappa) * CovVZ)\n# }\n\n\ngetcov.zz <- function(t1, t2, tau, t0 = 0) {\n  eps1 <- exp(-(t1 - t0)/tau)\n  kappa <- exp(-(t2 - t1)/tau)\n  CovVZ <- tau * (1 - eps1)^2 #* 2 / pi\n  VarZ <- tau^2 * ((t1 - t0)/tau - 2 * (1 - eps1) + (1 - eps1^2)/2) *2 # 4 / pi\n  return(VarZ + tau * (1 - kappa) * CovVZ)\n}\n\n\ngetS.zz <- function(T, tau, t0 = 0) {\n  M <- outer(T,T,getcov.zz, tau=tau)\n  M[lower.tri(M)] <- t(M)[lower.tri(M)]\n  return(Matrix(M))\n}\n",
+    "created" : 1419276353665.000,
+    "dirty" : false,
+    "encoding" : "WINDOWS-1252",
+    "folds" : "",
+    "hash" : "2565616987",
+    "id" : "378F7774",
+    "lastKnownWriteTime" : 1419276649,
+    "path" : "~/Documents/ecomove/cvm/cvm/R/getS.r",
+    "project_path" : "R/getS.r",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

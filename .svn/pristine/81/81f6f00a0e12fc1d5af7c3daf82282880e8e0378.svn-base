@@ -1,0 +1,20 @@
+\name{getV.spline}
+\alias{getV.spline}
+\title{Get splined velocity estimates}
+\usage{
+getV.spline(Z, T)
+}
+\arguments{
+  \item{Z}{location data in complex form (X + iY)}
+
+  \item{T}{time of observations (NOTE: must be regularly
+  spaced for methods "vaf" and "crw")}
+}
+\value{
+a list with the estimated velocity (V), as well as the
+position (Z) and time (T).
+}
+\description{
+A cubic spline of a 2D track over time.
+}
+

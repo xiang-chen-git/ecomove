@@ -1,0 +1,16 @@
+{
+    "contents" : "#' Likelihood functions for cvm estimation\n#' \n#' Likelihood for estimating cvm parameters for one dimensional Z vector. \n#' @usage Z.like1D(p, Z, T)\n#' @usage Z.like2D(p, Z, T)\n#' @usage Z.likeBlock(p, Z, T, v0=NULL, k)\n#' @aliases Z.like2D, Z.likeBlock\n#' @param p numeric vector of either form c(nu, tau, v0) or c(nu, tau) if v0 is provided\n#' @param Z,T one-dimensional location and time vectors\n#' @examples \n#' \n#' # Simulate some 1-D data\n#' \n#' nu <- 10\n#' tau <- 3\n#' v0 <- 20\n#' mycvm <- CVM2(nu, tau, T = cumsum(rexp(50)), v0)\n#' X <- Re(myvm$Z)\n#' T <- mycvm$T\n#' \n#' # Obtain and plot marginal likelihoods with correct values\n#' \n#' LikelihoodScan(X,T,nu,tau,v0,Z.like1)\n#' LikelihoodScan(X,T,nu,tau,v0,Z.like2, k=5)\n#' \n#' # Obtain MLE\n#' \n#' nu <- 3; tau <- 0.5; v0 <- 0\n#' T <- cumsum(rexp(50))\n#' Z <- Re(CVM2(T, nu, tau, v0)$Z)\n#' plot(T,Z, type=\"o\")\n#' \n#' optim(c(1,1), Z.likelihood, Z=Z, T=T, control=list(fnscale=-1))\n\n\n#Z.like1D <-\n#  function(p, Z, T, v0=NULL)\n#  {\n#    nu <- p[1]; tau <- p[2]; if(is.null(v0)) v0 <- p[3]\n#    Sigma.zz <- getSigma.ZZ(T, nu, tau)\n#    mu.z <- v0*tau*(1-exp(-T/tau))\n#    dmvnorm2(Z,mu.z,Sigma.zz, log=TRUE)\n#  }\n\n# Z.like2D <-\n#   function(p, Z, T, v0=NULL)\n#   {\n#     nu <- p[1] \n#     tau <- p[2] \n#     if(is.null(v0)) { v0x <- p[3]; v0y <- p[4] } else{v0x <- Re(v0); v0y <- Im(v0)}\n#     \n#     Sigma.zz <- getSigma.ZZ(T, nu, tau)\n#     mux <- v0x * tau*(1-exp(-T/tau))\n#     muy <- v0y * tau*(1-exp(-T/tau))\n#     \n#     dmvnorm2(Re(Z),mux,Sigma.zz, log=TRUE) + dmvnorm2(Im(Z),muy,Sigma.zz, log=TRUE)\n#   }\n\n\nZ.likeBLOCK <- function(p, Z, T, k, v0=NULL)\n{\n  n <- length(Z)\n  nu <- p[1]\n  tau <- p[2]\n  if(is.null(v0)) v0 <- p[3]\n  \n  Ls <- rep(0, n-k-1)\n  for(i in 1:(length(Ls)))\n  {\n    mySigma <- getSigma.ZZ(T[(i+1):(i+k)], nu, tau, t0=T[i])\n    myMu <- v0*exp(-T[i]/tau) * tau * (1 - exp(-T[(i+1):(i+k)]/tau))\n    Ls[i] <- dmvnorm2(Z[(i+1):(i+k)] - Z[i], myMu, mySigma, log = TRUE)\n  }\n  sum(Ls)\n}",
+    "created" : 1419279059091.000,
+    "dirty" : false,
+    "encoding" : "WINDOWS-1252",
+    "folds" : "",
+    "hash" : "2953038980",
+    "id" : "BB617A7D",
+    "lastKnownWriteTime" : 1416805056,
+    "path" : "~/Documents/ecomove/cvm/cvm/R/Z.likelihood.R",
+    "project_path" : "R/Z.likelihood.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

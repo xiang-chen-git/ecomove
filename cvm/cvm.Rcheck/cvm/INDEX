@@ -1,0 +1,19 @@
+Bowhead                 Bowhead GPS data
+CVM                     Correlated velocity movement: OU Simulation
+CVM2                    Correlated velocity movement: Exact Updating
+CVMstan2D               STAN model for fitting CVM
+LikelihoodScan          Likelihood scan function
+MakeLetter              Make Letter
+OUF                     Simulating OUF process
+Z.like1D                Likelihood functions for cvm estimation
+Z.likeBLOCK             Likelihood functions for cvm estimation
+Z.likelihood            Likelihood of 1-D Z estimation
+cvm-package             What the package does (short line) ~~ package
+                        title ~~
+diagnoseSTANfit         Diagnose STAN fit
+estimateCVM             Estimating parameters of CVM
+getCov.vz               Var-Cov block of 1-D V and Z
+getSigma.VZ             Obtain 1D complete VV-VZ-ZZ or ZZ covariance
+                        matrix
+getV.spline             Get splined velocity estimates
+getcov.zz               Obtain 1D complete S.zz matrix

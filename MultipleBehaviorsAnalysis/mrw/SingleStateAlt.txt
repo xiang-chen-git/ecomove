@@ -1,0 +1,42 @@
+data
+{
+  for (t in 1:numT) 
+  {
+    ones[t] <- 1
+  }
+}
+model
+{
+  for (t in 1:numT) 
+  {
+    # likelihood for steps 
+    step[t] ~ dweib(v[t], lambda[t]) 	# Weibull distriution for step length
+    
+    v[t] <- a        	# shape parameter
+    lambda[t] <- pow(b, -a)    # scale parameter (transform between WinBUGS and R's definition of Weibull)
+    
+    # likelihood for turns. We use the “ones” trick to sample from the 
+    # Wrapped Cauchy distribution (see WinBUGS manual)
+    ones[t] ~ dbern(wc[t]) 
+    # Density function for Wrapped Cauchy distribution
+    wc[t] <- ( 1/(2*Pi) * (1 - rho.t[t] * rho.t[t]) / (1 + rho.t[t] * rho.t[t] - 2*rho.t[t] * cos(theta[t] - mu.t[t])) ) / 500 
+  
+    rho.t[t] <- rho    	# mean cosine for the circular distribution
+    mu.t[t] <- mu       # mean direction for turns
+  }
+
+  ####### priors on movement parameters 
+  
+  a ~ dgamma(0.01, 0.01)     # prior distribution for the shape parameter 
+  b ~ dgamma(0.01, 0.01)  	 # prior distribution for scale parameter 
+
+  ###### priors for mean direction of turns 
+  
+  mu ~ dunif(-Pi/2, 3*Pi/2) # different boundaries for circular distribution
+  rho ~ dunif(0, 1)	  # prior for mean cosine of circular distribution 
+  
+  Pi <- 3.14159265359     # define π
+} 
+
+
+

@@ -1,0 +1,267 @@
+* using log directory ‘/Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck’
+* using R version 3.1.0 (2014-04-10)
+* using platform: x86_64-apple-darwin13.1.0 (64-bit)
+* using session charset: UTF-8
+* checking for file ‘cvm/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘cvm’ version ‘0.11’
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+Depends: includes the non-default packages:
+  ‘MASS’ ‘Matrix’ ‘mvtnorm’ ‘Rcpp’ ‘RcppArmadillo’ ‘CircStats’ ‘nlme’
+  ‘numDeriv’ ‘crawl’
+Adding so many packages to the search path is excessive and importing
+selectively is preferable.
+* checking if this is a source package ... OK
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘cvm’ can be installed ... WARNING
+Found the following significant warnings:
+  Warning: package ‘mvtnorm’ was built under R version 3.1.2
+  Warning: package ‘Rcpp’ was built under R version 3.1.1
+  Warning: package ‘RcppArmadillo’ was built under R version 3.1.2
+  Warning: package ‘sp’ was built under R version 3.1.2
+  Warning: package ‘raster’ was built under R version 3.1.1
+  Warning: /Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/00_pkg_src/cvm/man/cvm-package.Rd:33: All text must be in a section
+  Warning: /Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/00_pkg_src/cvm/man/cvm-package.Rd:34: All text must be in a section
+  Warning: /Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/00_pkg_src/cvm/man/diagnoseSTANfit.Rd:10: unexpected macro '\link', expecting '{'
+  Warning: package ‘mvtnorm’ was built under R version 3.1.2
+  Warning: package ‘Rcpp’ was built under R version 3.1.1
+  Warning: package ‘RcppArmadillo’ was built under R version 3.1.2
+  Warning: package ‘sp’ was built under R version 3.1.2
+  Warning: package ‘raster’ was built under R version 3.1.1
+See ‘/Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/00install.out’ for details.
+* checking installed package size ... OK
+* checking package directory ... OK
+* checking ‘build’ directory ... OK
+* checking DESCRIPTION meta-information ... OK
+* checking top-level files ... OK
+* checking for left-over files ... OK
+* checking index information ... WARNING
+Vignettes with missing or empty \VignetteIndexEntry:
+[1] "cvm.Rnw"
+See the information on INDEX files and package subdirectories in the
+chapter ‘Creating R packages’ of the ‘Writing R Extensions’ manual.
+* checking package subdirectories ... OK
+* checking R files for non-ASCII characters ... OK
+* checking R files for syntax errors ... OK
+* checking whether the package can be loaded ... OK
+* checking whether the package can be loaded with stated dependencies ... OK
+* checking whether the package can be unloaded cleanly ... OK
+* checking whether the namespace can be loaded with stated dependencies ... OK
+* checking whether the namespace can be unloaded cleanly ... OK
+* checking dependencies in R code ... NOTE
+Packages in Depends field not imported from:
+  ‘CircStats’ ‘MASS’ ‘Matrix’ ‘Rcpp’ ‘RcppArmadillo’ ‘crawl’ ‘mvtnorm’
+  ‘nlme’ ‘numDeriv’
+  These packages need to be imported from (in the NAMESPACE file)
+  for when this namespace is loaded but not attached.
+See the information on DESCRIPTION files in the chapter ‘Creating R
+packages’ of the ‘Writing R Extensions’ manual.
+* checking S3 generic/method consistency ... OK
+* checking replacement functions ... OK
+* checking foreign function calls ... OK
+* checking R code for possible problems ... NOTE
+Z.likeBLOCK: no visible global function definition for ‘dmvnorm2’
+estimateCVM.onestep: no visible binding for global variable ‘tau.fit’
+* checking Rd files ... WARNING
+Bowhead.Rd: non-ASCII input and no declared encoding
+prepare_Rd: CVMstan2D.Rd:86-88: Dropping empty section \details
+prepare_Rd: CVMstan2D.Rd:89-91: Dropping empty section \source
+prepare_Rd: CVMstan2D.Rd:92-94: Dropping empty section \references
+prepare_Rd: cvm-package.Rd:33: All text must be in a section
+prepare_Rd: cvm-package.Rd:34: All text must be in a section
+prepare_Rd: diagnoseSTANfit.Rd:10: unexpected macro '\link', expecting '{'
+problem found in ‘Bowhead.Rd’
+* checking Rd metadata ... WARNING
+Rd files with duplicated alias 'Z.like2D,':
+  ‘Z.like1D.Rd’ ‘Z.likeBLOCK.Rd’
+Rd files with duplicated alias 'Z.likeBlock':
+  ‘Z.like1D.Rd’ ‘Z.likeBLOCK.Rd’
+* checking Rd cross-references ... WARNING
+Unknown package ‘<pkg>’ in Rd xrefs
+Missing link or links in documentation object 'diagnoseSTANfit.Rd':
+  ‘estimateCVM.fullL’
+
+See the information in section 'Cross-references' of the 'Writing R
+Extensions' manual.
+
+* checking for missing documentation entries ... WARNING
+Undocumented code objects:
+  ‘ComplexDot’ ‘DiagnoseCRW’ ‘Mahalanobis’ ‘Z.like2D’
+  ‘estimateCVM.crawl’ ‘estimateCVM.crw’ ‘estimateCVM.fullL’
+  ‘estimateCVM.onestep’ ‘estimateCVM.vaf’ ‘getCov.zz2’ ‘getS.zz’
+  ‘getSigma.ZZ2’ ‘getTau’ ‘getVaf’ ‘getX’ ‘mvrnorm2’ ‘reload’
+All user-level objects in a package should have documentation entries.
+See the chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking for code/documentation mismatches ... WARNING
+Functions or methods with usage in documentation object 'Z.like1D' but not in code:
+  Z.like1D
+
+Functions or methods with usage in documentation object 'Z.likeBLOCK' but not in code:
+  Z.like1D
+
+Functions or methods with usage in documentation object 'Z.likelihood' but not in code:
+  Z.likelihood
+
+Functions or methods with usage in documentation object 'getcov.zz' but not in code:
+  getS.ZZ
+
+Codoc mismatches from documentation object 'CVM':
+CVM
+  Code: function(nu = 1, tau = 1, v0 = nu * exp((0+1i) * runif(1, 0, 2
+                 * pi)), Tmax = 10, dt = 0.1)
+  Docs: function(nu = 1, tau = 1, v0 = nu * exp((0 + (0+1i)) * runif(1,
+                 0, 2 * pi)), Tmax = 10, dt = 0.1)
+  Mismatches in argument default values:
+    Name: 'v0' Code: nu * exp((0+1i) * runif(1, 0, 2 * pi)) Docs: nu * exp((0 + (0+1i)) * runif(1, 0, 2 * pi))
+
+Codoc mismatches from documentation object 'CVM2':
+CVM2
+  Code: function(T, nu = 1, tau = 1, v0 = nu * exp((0 + (0+1i)) *
+                 runif(1, 0, 2 * pi)))
+  Docs: function(T, nu = 1, tau = 1, v0 = nu * exp((0 + (0 + (0+1i))) *
+                 runif(1, 0, 2 * pi)))
+  Mismatches in argument default values:
+    Name: 'v0' Code: nu * exp((0 + (0+1i)) * runif(1, 0, 2 * pi)) Docs: nu * exp((0 + (0 + (0+1i))) * runif(1, 0, 2 * pi))
+
+Codoc mismatches from documentation object 'getCov.vz':
+getCov.vz
+  Code: function(t1, t2, nu, tau, t0 = 0)
+  Docs: function(t1, t2, nu, tau)
+  Argument names in code not in docs:
+    t0
+
+Codoc mismatches from documentation object 'getSigma.VZ':
+getSigma.VZ
+  Code: function(T, nu, tau, t0 = 0)
+  Docs: function(T, nu, tau, v0 = nu)
+  Argument names in code not in docs:
+    t0
+  Argument names in docs not in code:
+    v0
+  Mismatches in argument names:
+    Position: 4 Code: t0 Docs: v0
+getSigma.ZZ
+  Code: function(T, nu, tau, t0 = 0)
+  Docs: function(T, nu, tau, v0 = nu)
+  Argument names in code not in docs:
+    t0
+  Argument names in docs not in code:
+    v0
+  Mismatches in argument names:
+    Position: 4 Code: t0 Docs: v0
+
+Codoc mismatches from documentation object 'getcov.zz':
+getcov.zz
+  Code: function(t1, t2, tau, t0 = 0)
+  Docs: function(T, tau, v0 = nu)
+  Argument names in code not in docs:
+    t1 t2 t0
+  Argument names in docs not in code:
+    T v0
+  Mismatches in argument names:
+    Position: 1 Code: t1 Docs: T
+    Position: 2 Code: t2 Docs: tau
+    Position: 3 Code: tau Docs: v0
+
+* checking Rd \usage sections ... WARNING
+Documented arguments not in \usage in documentation object 'CVM2':
+  ‘z0’
+
+Undocumented arguments in documentation object 'LikelihoodScan'
+  ‘...’
+
+Undocumented arguments in documentation object 'OUF'
+  ‘z0’ ‘u0’
+
+Objects in \usage without \alias in documentation object 'Z.likeBLOCK':
+  ‘Z.like1D’
+
+Undocumented arguments in documentation object 'Z.likelihood'
+  ‘p’ ‘Z’ ‘T’
+
+Undocumented arguments in documentation object 'diagnoseSTANfit'
+  ‘STANfit’ ‘iter’
+
+Undocumented arguments in documentation object 'getCov.vz'
+  ‘t1’ ‘t2’ ‘nu’
+Documented arguments not in \usage in documentation object 'getCov.vz':
+  ‘{t1’ ‘t2}’ ‘{nu’ ‘v0}’
+
+Undocumented arguments in documentation object 'getSigma.VZ'
+  ‘v0’
+
+Undocumented arguments in documentation object 'getcov.zz'
+  ‘v0’
+Objects in \usage without \alias in documentation object 'getcov.zz':
+  ‘getS.ZZ’
+
+Bad \usage lines found in documentation object 'estimateCVM':
+  estimateCVM <- function(Z, T, parameters = c("nu", "tau", "v0")[1:2], CI = FALSE, method = c("vaf", "crw", "onestep", "fullL", "crawl")[1], diagnose = FALSE, ...)
+
+Functions with \usage entries need to have the appropriate \alias
+entries, and all their arguments documented.
+The \usage entries must correspond to syntactically valid R code.
+See the chapter ‘Writing R documentation files’ in the ‘Writing R
+Extensions’ manual.
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... WARNING
+Warning: parse error in file 'cvm-Ex.R':
+225:26: unexpected ';'
+224: par(bty="n", pch=19, mfrow=c(1,3))
+225: plot(nus, ll.nu, type="l";
+                              ^
+* checking contents of ‘data’ directory ... WARNING
+Files not of a type allowed in a ‘data’ directory:
+  ‘CVMstan2D.model’
+Please use e.g. ‘inst/extdata’ for non-R data files
+* checking data for non-ASCII characters ... NOTE
+  Error in .requirePackage(package) : 
+    unable to find required package 'rstan'
+  Calls: <Anonymous> ... .extendsForS3 -> extends -> getClassDef -> .requirePackage
+  Execution halted
+* checking data for ASCII and uncompressed saves ... WARNING
+  Warning: namespace ‘rstan’ is not available and has been replaced
+  by .GlobalEnv when processing object ‘CVMstan2D’
+  Warning: namespace ‘inline’ is not available and has been replaced
+  by .GlobalEnv when processing object ‘CVMstan2D’
+  
+  Note: significantly better compression could be obtained
+        by using R CMD build --resave-data
+                old_size new_size compress
+  Bowhead.rda       41Kb     29Kb       xz
+  CVMstan2D.rda    1.2Mb    461Kb       xz
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking compiled code ... OK
+* checking sizes of PDF files under ‘inst/doc’ ... OK
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... ERROR
+Running examples in ‘cvm-Ex.R’ failed
+The error most likely occurred in:
+
+> ### Name: Bowhead
+> ### Title: Bowhead GPS data
+> ### Aliases: Bowhead
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(Bowhead)
+> 
+> # googlemap (requires internet access)
+> require(ggmap)
+Loading required package: ggmap
+Warning in library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called ‘ggmap’
+> DiskoBay <- get_map(location = c(-53.4, 69), maptype = "terrain", zoom=8)
+Error: could not find function "get_map"
+Execution halted

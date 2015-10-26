@@ -1,0 +1,16 @@
+{
+    "contents" : "  \\name{Simp}\n\\alias{Simp}\n\\docType{data}\n\\title{Simulated Chimp (Simp) Data}\n\\description{This is a simulated movement track from a continuous auto-correlated process of total duration 60 time units with four behavioral phases that switch at times T=10, 20 and 50 from, variously, higher or lower velocity and longer or shorter characteristic time scale of autocorrelation. The original data was simulated with time intervals of 0.01 (leading to a complete track with 6000 data points). 200 points were randomly sampled from the \"true\" movement track, such that the intervals between locations are random with mean interval 0.3 units. \n}\n\\usage{data(Simp)}\n\\format{ Data frame (of class \"track\") containing 200 rows and three columns:\n\\describe{\n\\item{Time}{times of observation} \n\\item{X, Y}{coordinates}   \n}}\n\\source{\nFor more details, see: \\url{http://wiki.cbr.washington.edu/qerm/index.php/Behavioral_Change_Point_Analysis}\n}\n\\examples{\ndata(Simp)\nplot(Simp)\n}\n\\keyword{datasets}\n",
+    "created" : 1382502271424.000,
+    "dirty" : false,
+    "encoding" : "KOI8-R",
+    "folds" : "",
+    "hash" : "3208324413",
+    "id" : "23EE389E",
+    "lastKnownWriteTime" : 1382502579,
+    "path" : "~/programming/ecomove/bcpa/bcpa/man/Simp.Rd",
+    "project_path" : "man/Simp.Rd",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_doc"
+}

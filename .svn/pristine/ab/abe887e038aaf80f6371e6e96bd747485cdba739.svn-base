@@ -1,0 +1,15 @@
+\name{diagnoseSTANfit}
+\alias{diagnoseSTANfit}
+\title{Diagnose STAN fit}
+\usage{
+diagnoseSTANfit(STANfit, iter)
+}
+\description{
+Used internally in \code\link{estimateCVM.fullL}
+}
+\details{
+provides diagnosis plots of chain convergence and posterior
+density histograms for nu and tau parameters as fitted by
+STAN
+}
+

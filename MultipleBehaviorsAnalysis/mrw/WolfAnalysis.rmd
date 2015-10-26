@@ -1,0 +1,142 @@
+Wolf Analysis
+========================================================
+	
+### Preparation
+Get the results, load packages, etc.
+```{r, message=FALSE, warning=FALSE}
+require(waddle)
+require(mrw)
+data(Wolf.Data)
+data(Wolf.VT)
+data(Wolf.singleState)
+data(Wolf.doubleState)
+data(Wolf.doubleStateSwitch)
+data(Wolf.tripleStateSwitch)
+```
+
+Data
+-------------------------
+The wolf data (using the same daily time step interpolation as the other analysis).
+```{r, echo=FALSE}
+plot(Wolf.Data$X, Wolf.Data$Y, type = "o", asp = 1, pch = 19, col = rgb(0, 0, 0, 0.3), xlab = "X", ylab = "Y")
+```
+
+
+Single state model
+-------------------------
+The single state model is simply a correlated random walk using a Weibull for the step lengths and a wrapped Cauchy for the turning angle. There is no evidence on non-convergence.
+```{r}
+analyzeConvergence(Wolf.singleState)
+```
+
+We can compare the parameter estimates using maximum likihood compared to the Bayesian MCMC approach using JAGS. All parameters are estimated similarly except for mu. The differences in estimating mu are not concerning given that mu is poorly estimated when rho is near 0 which implies a uniform circular distribution.
+```{r}
+require(stats4)
+
+likelihood <- function(a, b, mu, rho, step, theta)
+{
+	stepLike = dweibull(step, shape = a, scale = b)
+	thetaLike = dwrpcauchy(theta, mu = mu, rho = rho)
+	negLogLike <- -1 * sum(log(stepLike), log(thetaLike))
+	return(negLogLike)
+}
+
+est <- mle(likelihood, start = list(a = 1, b = 1, mu = 0, rho = 0.5), fixed = list(step = Wolf.VT$S, theta = Wolf.VT$Theta),
+		lower = c(0.001, 0.001, -pi, 0), upper = c(Inf, Inf, pi, 1), method = "L-BFGS-B")
+summary(est)
+
+plotSingleStateDistributions(Wolf.singleState, Wolf.VT$S, Wolf.VT$Theta)
+```
+
+The fit of the step distribution for a single state is good (i.e. compared to the lamprey data), but we can also consider 2 or more states, especially since the turning angle distribution looks bimodal. 
+
+Double state model
+-------------------------
+First we use a model with 2 states, but no persistance, that is each step is independently assigned to one of two correlated random walks. There is no evidence of non-convergence.
+
+```{r}
+analyzeConvergence(Wolf.doubleState)
+```
+
+We can now look at how the steps are assigned to states.
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2),mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(Wolf.doubleState)
+plotStateProbabilities(Wolf.doubleState)
+```
+
+In this case, both step and turning angle appear to influence state assignment and both appear to reasonable fit with their assumed distributions. State 1 characterized by large steps and more straight-ahead motion, while state 2 is characterized by short steps and frequent direction reversals.
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotDoubleStateDistributions(Wolf.doubleState, Wolf.VT$S, Wolf.VT$Theta)
+```
+
+Double state switch model
+-------------------------
+Now we can look at the hidden Markov model, in which there are 2 states (mixture of two correlated random walks) with a matrix of probabilities for remaining in the current state or switching to a different state. There is no evidence of non-convergence.
+```{r}
+analyzeConvergence(Wolf.doubleStateSwitch)
+```
+
+We can look at how the steps are assigned to states. While there is more persistence in a state (as expected now that we are fitting transition probabilities), there are still frequent switches between states, especially compared to the other data sets.
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2),mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(Wolf.doubleStateSwitch)
+plotStateProbabilities(Wolf.doubleStateSwitch)
+```
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotDoubleStateDistributions(Wolf.doubleStateSwitch, Wolf.VT$S, Wolf.VT$Theta)
+```
+
+
+
+Triple state switch model
+-------------------------
+Finally, we can examine the triple state switching model, to see if there is any evidence of another state. There is no evidence of non-convergence.
+```{r}
+analyzeConvergence(Wolf.tripleStateSwitch)
+```
+
+The sedentary state (state 2 in the double state switch model and state 1 in the triple state switch model) is very similar to the sedentary state in the double state switch model, and 
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(Wolf.tripleStateSwitch, nstates = 3)
+plotStateProbabilities(Wolf.tripleStateSwitch)
+```
+
+Along with the sedentary state, the active state is broken into two states. First, a state with relatively smaller staps in all directions (state 2) and another state with relatively larger steps generally straight ahead (state 3). The different states can be seen visually in the track as well.
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mfrow = c(2,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotTripleStateDistributions(Wolf.tripleStateSwitch, Wolf.VT$S, Wolf.VT$Theta)
+```
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+plot(Wolf.VT$Z.start, type = "o", asp = 1, pch = 19, col = c("red", "blue", "yellow")[getModeStates(Wolf.tripleStateSwitch)], xlab = "X", ylab = "Y")
+```
+
+The transition matrix.
+```{r}
+getTransitionMatrix(Wolf.tripleStateSwitch, nstates = 3)
+```
+
+
+Change point comparison
+-------------------------
+Interestingly, the change points are more similar between models than the other data sets.
+```{r}
+cbind(Wolf.VT, state = getModeStates(Wolf.doubleState))[which(diff(getModeStates(Wolf.doubleState)) != 0), c(3:5, 10:12)]
+cbind(Wolf.VT, state = getModeStates(Wolf.doubleStateSwitch))[which(diff(getModeStates(Wolf.doubleStateSwitch)) != 0), c(3:5, 10:12)]
+cbind(Wolf.VT, state = getModeStates(Wolf.tripleStateSwitch))[which(diff(getModeStates(Wolf.tripleStateSwitch)) != 0), c(3:5, 10:12)]
+```
+
+Model comparison
+-------------------------
+We can compare models using DIC (a function of the deviance and the estimated number of parameters, pD). DIC would support selecting the double state switch model.
+```{r}
+getDIC(list(Wolf.singleState, Wolf.doubleState, Wolf.doubleStateSwitch, Wolf.tripleStateSwitch))
+```

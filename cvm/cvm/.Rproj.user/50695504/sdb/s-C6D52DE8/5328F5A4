@@ -1,0 +1,16 @@
+{
+    "contents" : "#' Diagnose STAN fit\n#' \n#' Used internally in \\code\\link{estimateCVM.fullL}\n#' \n#' @details provides diagnosis plots of chain convergence and posterior density histograms for nu and tau parameters as fitted by STAN\n\ndiagnoseSTANfit <- function(STANfit, iter)\n{\n  layout(rbind(c(1,1,2),c(3,3,4)))\n  par(bty=\"l\")\n  tau.sim <- STANfit@sim$samples[[1]]$tau\n  nu.sim <- STANfit@sim$samples[[1]]$nu\n  \n  p <- c(0.025, 0.25, 0.5, 0.75, 0.975)\n  \n  plot(tau.sim, type=\"l\", main=\"tau chain\")\n  hist(tau.sim[50:iter], col=\"grey\", bor=\"darkgrey\", main=\"95 and 50% C.I.\")\n  abline(v=quantile(tau.sim[50:iter], p), lty=c(3,2,1,2,3), col=2, lwd=2)\n  plot(nu.sim, type=\"l\", main=\"nu chain\")\n  hist(nu.sim[50:iter], col=\"grey\", bor=\"darkgrey\", main=\"95 and 50% C.I.\")\n  abline(v=quantile(nu.sim[50:iter], p), lty=c(3,2,1,2,3), col=2, lwd=2)\n}\n",
+    "created" : 1419279394475.000,
+    "dirty" : false,
+    "encoding" : "WINDOWS-1252",
+    "folds" : "",
+    "hash" : "3266626332",
+    "id" : "5328F5A4",
+    "lastKnownWriteTime" : 1416805056,
+    "path" : "~/Documents/ecomove/cvm/cvm/R/diagnoseSTANfit.R",
+    "project_path" : "R/diagnoseSTANfit.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,17 @@
+{
+    "contents" : "## ======================================================================\n## Step 1: Download all log files\n## ======================================================================\n\nsetwd(\"c:/eli/sandbox\")\n\n# Here's an easy way to get all the URLs in R\nstart <- as.Date('2013-10-01')\ntoday <- as.Date('2014-10-10')\n\nall_days <- seq(start, today, by = 'day')\n\nyear <- as.POSIXlt(all_days)$year + 1900\nurls <- paste0('http://cran-logs.rstudio.com/', year, '/', all_days, '.csv.gz')\n\n## ======================================================================\n## Step 2: Load single data files into one big data.table\n## ======================================================================\n\n\n# only download the files you don't have:\nmissing_days <- setdiff(as.character(all_days), tools::file_path_sans_ext(dir(\"CRANlogs\"), TRUE))\n\ndir.create(\"CRANlogs\")\nfor (i in 228:length(missing_days)) {\n  print(paste0(i, \"/\", length(missing_days)))\n  try(download.file(urls[i], paste0('CRANlogs/', missing_days[i], '.csv.gz')))\n}\n\n\nfile_list <- list.files(\"CRANlogs\", full.names=TRUE)\n\nlogs <- list()\nfor (file in file_list) {\n  print(paste(\"Reading\", file, \"...\"))\n  logs[[file]] <- read.table(file, header = TRUE, sep = \",\", quote = \"\\\"\",\n                             dec = \".\", fill = TRUE, comment.char = \"\", as.is=TRUE)\n}\n\n# rbind together all files\nlibrary(data.table)\ndat <- rbindlist(logs)\n\n# add some keys and define variable types\ndat[, date:=as.Date(date)]\ndat[, package:=factor(package)]\ndat[, country:=factor(country)]\ndat[, weekday:=weekdays(date)]\ndat[, week:=strftime(as.POSIXlt(date),format=\"%Y-%W\")]\n\nsetkey(dat, package, date, week, country)\n\nsave(dat, file=\"CRANlogs/CRANlogs.RData\")\n\n",
+    "created" : 1412966950794.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3893316418",
+    "id" : "44D5DE33",
+    "lastKnownWriteTime" : 1412966415,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

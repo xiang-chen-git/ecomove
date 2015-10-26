@@ -1,0 +1,512 @@
+Re(b)*(Re(a) + Im(a)) - Im(b)*(Re(a)-Im(a))
+ComplexDot2(a,b)
+library(cvm)
+truncate <- min(which(vaf<exp(-3)))
+vaf <- vaf[1:truncate]
+lag <- lag[1:truncate]
+truncate
+T <- T-min(T)
+dT <- mean(diff(T))
+if(sd(diff(T))>1e-10) stop("Sorry - time intervals must be constant to use this method.")
+lag <- T[1:min(500,length(T)/2)]
+V <- diff(Z)/diff(T)
+lag.scalar <- lag[-1]/dT
+lag.scalar
+vaf <- apply(as.matrix(lag.scalar),1,getVaf, V=V)
+vaf <- c(1,as.vector(vaf[-length(vaf)]))
+getVaf
+vaf <- c(1,as.vector(vaf[-length(vaf)]))
+lag <- lag[-length(lag)]
+truncate <- 30
+truncate <- min(which(vaf<exp(-3)))
+truncate
+vaf <- vaf[1:truncate]
+lag <- lag[1:truncate]
+tau.gls <- gls(log(vaf)~lag-1, correlation = corAR1(form=~1), weights=varExp())
+beta.hat <- tau.gls$coef
+beta.hat
+tau.hat <- as.numeric(-1/beta.hat)
+nu.hat <- mean(Mod(V))
+results <- data.frame(tau.hat = tau.hat, nu.hat = nu.hat)
+rho.hat <- cor(Mod(V[-1]), Mod(V[-length(V)]))
+nu.se <- sd(Mod(V))/sqrt(length(V))/(1-rho.hat)/2
+nu.CI <- nu.hat +  c(-1,1) * qnorm(0.975) * nu.se
+tau.CI <- -1/intervals(tau.gls)[[1]][c(1,3)]
+tau.CI
+plot(lag, log(vaf), ylab="log(vaf)", main="log(vaf) should look linear over this range", bty="l", cex.lab=1.25,
+cex.sub=1.25, font.sub = 2)
+abline(0, beta.hat, col=2)
+library(cvm)
+library(cvm)
+library(cvm)
+library(cvm)
+library(cvm)
+library(cvm)
+library(cvm)
+dt.spline <- min(diff(T))/30
+dt.spline <- min(diff(T))/30
+library(cvm)
+T
+Z
+Z <- Z[seq(1,10001,length=200)]
+T <- T[seq(1,10001, length=201)]
+Z
+length(Z)
+length(T)
+T <- T[-1]
+dt.spline <- min(diff(T))/30
+fX.spline <- splinefun(T, Re(Z))
+fY.spline <- splinefun(T, Im(Z))
+T.spline <- seq(min(T),max(T),dt.spline)
+X.spline <- fX.spline(T.spline )
+Y.spline <- fY.spline(T.spline )
+Z.spline <- X.spline + 1i*Y.spline
+V.spline <- diff(Z.spline)/diff(T.spline)
+T.mid <- (T[-1] + T[-length(T)])/2
+which.spline <- match(round(T.mid,-log(dt.spline,10)), round(T.spline,-log(dt.spline,10)))
+Z.mid <- Z.spline[which.spline]
+V.mid <- V.spline[which.spline][-1]
+T.mid
+length(T.mid)
+which.spline <- match(round(T.mid,-log(dt.spline,10)), round(T.spline,-log(dt.spline,10)))
+which.spline
+Z.mid <- Z.spline[which.spline]
+V.mid <- V.spline[which.spline]
+library(cvm)
+?standardize
+require(mapdata)
+require(mapdata)
+map('worldHires', ylim=c(36,38), xlim=c(14,16))
+require(mapdata)
+map('worldHires', ylim=c(36,38), xlim=c(14,16))
+map('worldHires', ylim=c(36,38), xlim=c(14,16), fill=TRUE)
+map('worldHires', ylim=c(36,39), xlim=c(13,16), fill=TRUE)
+map('worldHires', ylim=c(37,39), xlim=c(14,17), fill=TRUE)
+map('worldHires', ylim=c(36.5,39), xlim=c(15,17), fill=TRUE)
+map('worldHires', ylim=c(37,39), xlim=c(15,17), fill=TRUE)
+map('worldHires', ylim=c(38,39), xlim=c(15,17), fill=TRUE)
+map('worldHires', ylim=c(38.5,39), xlim=c(15,17), fill=TRUE)
+map('worldHires', ylim=c(37.5,39), xlim=c(15,17), fill=TRUE)
+map('worldHires', ylim=c(37.5,39), xlim=c(15,17), fill=TRUE, col="forestgreen")
+box()
+library(cvm)
+estimateCVM.crw
+library(cvm)
+reload()
+ls()
+getTay
+getTau
+estimateCVM.crw
+library(cvm)
+estimateCVM.crw
+rm(list=ls())
+reload()
+estimateCVM.crw
+library(cvm)
+citation(gls)
+citation("gls")
+require(gls)
+require(glme)
+require(nlme)
+gls
+citation(nlme)
+citation("nlme")
+?gls
+opts_chunk$set(fig.align='center', fig.show='hold', par=TRUE, size='footnotesize', cache=TRUE)
+require(knitr)
+opts_chunk$set(fig.align='center', fig.show='hold', par=TRUE, size='footnotesize', cache=TRUE)
+Ant <- read.csv("./data/AntSample.csv")
+wd <- "c:/eli/teaching/StatR301/2014/Week6"
+wd <- "c:/eli/teaching/StatR301/2014/Week6"
+setwd(wd)
+Ant <- read.csv("./data/AntSample.csv")
+data.frame(subset(Ant[,c(1,4,5)], Species=="Seed"),
+subset(Ant[,c(1,4,5)], Species=="Thatch"))[1:20,]
+col<-c("turquoise","turquoise4","salmon","salmon4")
+par(mfrow=c(1,2))
+boxplot(Weight~Species,main="Weight (mg)",col=col[1:2], data=Ant)
+boxplot(Headwidth1~Species,main="Head widths (mm)",col=col[3:4], data=Ant)
+tapply(Ant$Weight, Ant$Species, function(x) c(mean=mean(x), sd=sd(x)))
+tapply(Ant$Headwidth1, Ant$Species, function(x) c(mean=mean(x), sd=sd(x)))
+par(cex.lab=0.75, cex.axis=0.8, cex.main=0.8, mar=c(3,3,3,1))
+W.s <- subset(Ant, Species=="Seed")$Weight
+W.t <- subset(Ant, Species=="Thatch")$Weight
+W.M <- outer(sort(W.t), sort(W.s), ">")
+image(W.M, main="Weight", xlab="Seed Ants",
+ylab="Thatch Ants", col=col[1:2])
+sum(W.M > 0) / prod(table(Ant$Species))
+par(cex.lab=0.75, cex.axis=0.8, cex.main=0.8, mar=c(3,3,3,1))
+H.s <- subset(Ant, Species=="Seed")$Headwidth2
+H.t <- subset(Ant, Species=="Thatch")$Headwidth2
+H.M <- outer(sort(H.t), sort(H.s), ">")
+image(H.M, main="Head width", xlab="Seed Ants",
+ylab="Thatch Ants", col=col[3:4])
+sum(H.M > 0) / prod(table(Ant$Species))
+nreps <- 1000; D.weight.sim <- rep(0, nreps)
+for(i in 1:nreps)
+D.weight.sim[i] <- getD.means(Ant$Weight, sample(Ant$Species))
+D.head.sim <- rep(0, nreps)
+for(i in 1:nreps)
+D.head.sim[i] <- getD.means(Ant$Headwidth2, sample(Ant$Species))
+EQ <- read.csv("http://neic.usgs.gov/neis/gis/qed.asc")
+par(cex.lab=0.5, cex.axis=0.5, tck=0, mgp=c(1.5,.25,0), mar=c(3,3,1,1))
+EQ$DateTime <- strptime(paste(EQ$Date, EQ$Time), format = "%Y/%m/%d %H:%M:%S")
+hist(EQ$DateTime, col="grey", breaks=20, main="")
+EQ.apr <- EQ$DateTime[EQ$DateTime$mon == 3]
+EQ.apr
+EQ$DateTime
+EQ$DateTime$mon
+EQ.apr <- EQ$DateTime[EQ$DateTime$mon == 4]
+dEQ.apr <- na.omit(difftime(EQ.apr[-length(EQ.apr)], EQ.apr[-1], units="min"))
+sort(dEQ.apr)
+n <- length(dEQ.apr)
+mean(dEQ.apr) + c(-1,1)*qt(0.975, df=n-1)*sd(dEQ.apr)/sqrt(n)
+t.test(dEQ.apr)$conf.int
+par(cex.lab=0.5, cex.axis=0.5, tck=0, mgp=c(1.5,.25,0), mar=c(3,3,1,1))
+dim(EQ)
+EQ$DateTime <- strptime(paste(EQ$Date, EQ$Time), format = "%Y/%m/%d %H:%M:%S")
+hist(EQ$DateTime, col="grey", breaks=20, main="")
+head(EQ)
+range(EQ$DateTime)
+EQ <- read.csv("http://neic.usgs.gov/neis/gis/qed.asc")
+EQ$DateTime
+EQ$DateTime <- strptime(paste(EQ$Date, EQ$Time), format = "%Y/%m/%d %H:%M:%S")
+hist(EQ$DateTime, col="grey", breaks=20, main="")
+EQ <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_hour.csv")
+head(EQ)
+EQ <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv")
+head(EQ)
+EQ$DateTime <- as.POSIXlt(EQ$time, format = "%Y-%m-%dT%H:%M:%S")
+EQ$DateTime
+hist(EQ$DateTime, col="grey", breaks=20, main="")
+EQ.apr <- EQ$DateTime[EQ$DateTime$mon == 4]
+dEQ.apr <- na.omit(difftime(EQ.apr[-length(EQ.apr)], EQ.apr[-1], units="min"))
+sort(dEQ.apr)
+head(EQ)
+summary(EQ$mag)
+EQ.apr <- subset(EQ, mag>4.5)
+EQ.apr
+dEQ.apr <- na.omit(difftime(EQ.apr[-length(EQ.apr)], EQ.apr[-1], units="min"))
+EQ <- subset(EQ, mag>4.5)
+dEQ <- na.omit(difftime(EQ[-length(EQ)], EQ[-1], units="min"))
+EQ <- subset(EQ$time, mag>4.5)
+EQ <- subset(EQ, mag>4.5)$time
+dEQ <- na.omit(difftime(EQ[-length(EQ)], EQ[-1], units="min"))
+sort(dEQ)
+EQ <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv")
+par(cex.lab=0.5, cex.axis=0.5, tck=0, mgp=c(1.5,.25,0), mar=c(3,3,1,1))
+EQ$DateTime <- as.POSIXlt(EQ$time, format = "%Y-%m-%dT%H:%M:%S")
+hist(EQ$DateTime, col="grey", breaks=20, main="")
+EQ$DateTime
+dEQ <- na.omit(difftime(EQ$DateTime[-nrow(EQ)], EQ$DateTime[-1], units="min"))
+sort(dEQ)
+EQ <- subset(EQ, mag>4.5)
+summary(EQ$mag)
+range(EQ$DateTime)
+EQ <- subset(EQ, mag>6)
+dEQ <- na.omit(difftime(EQ$DateTime[-nrow(EQ)], EQ$DateTime[-1], units="min"))
+sort(dEQ)
+n <- length(dEQ.apr)
+n
+mean(dEQ.apr) + c(-1,1)*qt(0.975, df=n-1)*sd(dEQ.apr)/sqrt(n)
+t.test(dEQ.apr)$conf.int
+n <- length(dEQ)
+mean(dEQ) + c(-1,1)*qt(0.975, df=n-1)*sd(dEQ)/sqrt(n)
+dEQ
+t.test(dEQ)$conf.int
+EQ <- read.csv("http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv")
+par(cex.lab=0.5, cex.axis=0.5, tck=0, mgp=c(1.5,.25,0), mar=c(3,3,1,1))
+EQ$DateTime <- as.POSIXlt(EQ$time, format = "%Y-%m-%dT%H:%M:%S")
+hist(EQ$DateTime, col="grey", breaks=20, main="")
+EQ <- subset(EQ, mag>5)
+dEQ <- na.omit(difftime(EQ$DateTime[-nrow(EQ)], EQ$DateTime[-1], units="min"))
+sort(dEQ)
+n <- length(dEQ)
+mean(dEQ) + c(-1,1)*qt(0.975, df=n-1)*sd(dEQ)/sqrt(n)
+EQ <- subset(EQ, mag>6)
+dEQ <- na.omit(difftime(EQ$DateTime[-nrow(EQ)], EQ$DateTime[-1], units="min"))
+sort(dEQ)
+n <- length(dEQ)
+mean(dEQ) + c(-1,1)*qt(0.975, df=n-1)*sd(dEQ)/sqrt(n)
+t.test(dEQ)$conf.int
+nreps <- 1000
+mean.BS <- rep(0,nreps)
+for(i in 1:nreps)
+mean.BS[i] <- mean(sample(dEQ.apr, replace=TRUE))
+quantile(mean.BS, c(0.025, 0.975))
+nreps <- 1000
+for(i in 1:nreps)
+mean.BS <- rep(0,nreps)
+mean.BS[i] <- mean(sample(dEQ, replace=TRUE))
+quantile(mean.BS, c(0.025, 0.975))
+sample(dEQ, replace=TRUE)
+mean(sample(dEQ, replace=TRUE))
+mean.BS
+nreps <- 1000
+mean.BS <- rep(0,nreps)
+mean(sample(dEQ, replace=TRUE))
+for(i in 1:nreps)
+mean.BS[i] <- mean(sample(dEQ, replace=TRUE))
+mean.BS
+quantile(mean.BS, c(0.025, 0.975))
+t.test(dEQ)$conf.int
+mean.BS <- do(nreps) * mean(sample(dEQ.apr, replace=TRUE))
+require(mosaic)
+mean.BS <- do(nreps) * mean(sample(dEQ.apr, replace=TRUE))
+quantile(mean.BS[,1], c(0.025, 0.975))
+head(mean.BS)
+mean.BS <- do(nreps) * mean(sample(dEQ, replace=TRUE))
+head(mean.BS)
+dEQ <- as.numeric(na.omit(difftime(EQ$DateTime[-nrow(EQ)], EQ$DateTime[-1], units="min")))
+n <- length(dEQ)
+mean(dEQ) + c(-1,1)*qt(0.975, df=n-1)*sd(dEQ)/sqrt(n)
+t.test(dEQ)$conf.int
+nreps <- 1000
+mean.BS <- rep(0,nreps)
+for(i in 1:nreps)
+mean.BS[i] <- mean(sample(dEQ, replace=TRUE))
+quantile(mean.BS, c(0.025, 0.975))
+mean.BS <- do(nreps) * mean(sample(dEQ, replace=TRUE))
+quantile(mean.BS[,1], c(0.025, 0.975))
+median.BS <- do(nreps) * median(sample(dEQ, replace=TRUE))
+quantile(median.BS[,1], c(0.025, 0.5, 0.975))
+require(boot)
+plot(EQ$mag, EQ$depth)
+cor(EQ.mar$mag, EQ.mar$depth,  use= "complete.obs")
+cor(EQ$mag, EQ$depth,  use= "complete.obs")
+cor.bs <- boot(EQ[EQ$DateTime$mon == 3,],
+function(x, i)
+cor(x$Magnitude[i], x$Depth[i],
+use= "complete.obs"),
+R = 1000)
+(CI <- quantile(cor.bs$t, c(0.025, 0.975)))
+cor.bs <- boot(EQ[EQ$DateTime$mon == 3,],
+function(x, i)
+cor(x$mag[i], x$depth[i],
+use= "complete.obs"),
+R = 1000)
+(CI <- quantile(cor.bs$t, c(0.025, 0.975)))
+cor.bs <- boot(EQ,
+function(x, i)
+cor(x$mag[i], x$depth[i],
+use= "complete.obs"),
+R = 1000)
+(CI <- quantile(cor.bs$t, c(0.025, 0.975)))
+par(cex.lab=0.5, cex.axis=0.5, tck=0, mgp=c(1,.25,0), mar=c(3,3,1,1), lwd=1/2)
+hist(cor.bs$t, col="grey", main="")
+abline(v = CI, col=2, lwd=2)
+Solea <- read.csv("./data/Solea.csv")
+Y <- Solea$Solea_solea
+X <- Solea$salinity
+Sole.glm <- glm(Y ~ X, family = "binomial")
+expit <- function(x) exp(x)/(1 + exp(x))
+Sole.predict <- predict(Sole.glm, newdata = data.frame(X = 0:40), se.fit = TRUE)
+Sole.bs <- data.frame(X,Y)
+for(i in 1:100)
+{
+Sole.glm.bs <- glm(Y ~ X, data = Sole.bs[sample(1:nrow(Sole.bs), replace=TRUE),], family = "binomial")
+Sole.predict.bs <- predict(Sole.glm.bs, newdata = data.frame(X = 0:40), se.fit = TRUE)
+lines(0:40, expit(Sole.predict.bs$fit), col = rgb(0,1,0,.2), lwd = 2)
+}
+library(cvm)
+setwd("c:/eli/research/EstimatingCVM")
+source("./code/Functions05_SamplingFunctions.r")
+Phyllis <- read.csv("./data/BowheadData3.csv")
+head(Phyllis)
+is(Phyllis$DateTime)
+as.numeric(difftime(Phyllis$DateTime, Phyllis$DateTime[1], unit="hour"))
+T <- as.numeric(difftime(Phyllis$DateTime, Phyllis$DateTime[1], unit="hour"))
+T
+Phyllis$DateTime <- as.POSIXct(Phyllis$DateTime)
+Phyllis$DateTime
+range(Phyllis$DateTime)
+Phyllis$Hours <- difftime(Phyllis$DateTime, Phyllis$DateTime[1], units="hours")
+head(Phyllis)
+Phyllis$Hours <- as.numeric(difftime(Phyllis$DateTime, Phyllis$DateTime[1], units="hours"))
+head(Phyllis)
+save(Bowhead, "c:/eli/programming/ecomove/cvm/cvm/data/Bowhead.Rd")
+Bowhead <- Phyllis
+save(Bowhead, file= "c:/eli/programming/ecomove/cvm/cvm/data/Bowhead.Rd")
+Phyllis$Date <- NULL
+head(Phyllis)
+Phyllis$WhaleID <- NULL
+Phyllis <- Phyllis[,c(3,1:2,4:ncol(Phyllis))]
+head(Phyllis)
+Phyllis$RID
+Phyllis$RID <- NULL
+head(Phyllis)
+Phyllis <- Phyllis[,c(3,1:2,4:ncol(Phyllis))]
+save(Bowhead, file= "c:/eli/programming/ecomove/cvm/cvm/data/Bowhead.rda")
+head(Phyllis)
+getwd()
+setwd("c:/eli/programming/ecomove/cvm/cvm")
+load("./data/Bowhead.rda")
+head(Bowhead)
+Bowhead <- Phyllis
+save(Bowhead, file= "c:/eli/programming/ecomove/cvm/cvm/data/Bowhead.rda")
+dim(Bowhead)
+Phyllis <- read.csv("./data/BowheadData3.csv")
+setwd("c:/eli/research/EstimatingCVM")
+source("./code/Functions05_SamplingFunctions.r")
+Phyllis <- read.csv("./data/BowheadData3.csv")
+filter <- which(diff(Phyllis$Hours) < 0.09)
+Phyllis <- Phyllis[-filter,]
+filter <- with(Phyllis, which(Mod(diff(z.km)/diff(Hours)) > 10)+1
+)
+filter
+Phyllis <- Phyllis[-filter,]
+dim(Phyllis)
+Phyllis <- Phyllis[1:954,]
+setwd("c:/eli/research/EstimatingCVM")
+source("./code/Functions05_SamplingFunctions.r")
+Phyllis <- read.csv("./data/BowheadData3.csv")
+head(Phyllis)
+Phyllis$DateTime <- as.POSIXct(Phyllis$DateTime)
+Phyllis$Date <- NULL
+Phyllis$WhaleID <- NULL
+Phyllis$RID <- NULL
+Phyllis <- Phyllis[,c(3,1:2,4:ncol(Phyllis))]
+Phyllis$Hours <- as.numeric(difftime(Phyllis$DateTime, Phyllis$DateTime[1], units="hours"))
+# Filter too close intervals
+filter <- which(diff(Phyllis$Hours) < 0.09)
+Phyllis <- Phyllis[-filter,]
+# filter one hyper large velocity
+filter <- with(Phyllis, which(Mod(diff(z.km)/diff(Hours)) > 10)+1)
+Phyllis <- Phyllis[-filter,]
+# delete last chunk of data with very large intervals
+Phyllis <- Phyllis[1:954,]
+Bowhead <- Phyllis
+save(Bowhead, file= "c:/eli/programming/ecomove/cvm/cvm/data/Bowhead.rda")
+require(ggmap)
+head(Bowhead)
+with(Bowhead, median(Long))
+with(Bowhead, median(Lat))
+basemap1 <- get_map(location = c(-52, 69), maptype = "terrain", zoom=8)
+ggmap(basemap1)
+ggmap(basemap1) + geom_path(data = Boyhead, mapping = aes(x = Long, y = Lat))
+ggmap(basemap1) + geom_path(data = Bowhead, mapping = aes(x = Long, y = Lat))
+with(Bowhead(mean(range(Long))))
+with(Bowhead, mean(range(Long)))
+with(Bowhead, mean(range(Lat)))
+DiskoBay <- get_map(location = c(-53.4, 69), maptype = "terrain", zoom=8)
+ggmap(DiskoBay) + geom_path(data = Bowhead, mapping = aes(x = Long, y = Lat))
+?get_map
+require(ggmap)
+DiskoBay <- get_map(location = c(-53.4, 69), maptype = "satellite", zoom=9)
+ggmap(DiskoBay) + geom_path(data = Bowhead, mapping = aes(x = Long, y = Lat))
+data(Bowhead)
+require(ggmap)
+DiskoBay <- get_map(location = c(-53.4, 69), maptype = "terrain", zoom=8)
+ggmap(DiskoBay) + geom_path(data = Bowhead, mapping = aes(x = Long, y = Lat))
+require(crawl)
+library(cvm)
+?estimateCVM
+T <- cumsum(rexp(100,1))
+mycvm <- CVM2(T, nu, tau, v0)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="fullL", parameters=c("tau", "nu"))
+nu <- 10
+tau <- 3
+v0 <- 10
+plot(mycvm$Z, asp=1, type="b")
+T <- cumsum(rexp(100,1))
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="b")
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="fullL", parameters=c("tau", "nu"))
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="fullL")
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="crawl")
+estimateCVM(mycvm$Z,mycvm$T,method="crawl")
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="fullL")
+library(cvm)
+nu <- 10
+tau <- 2
+v0 <- 10
+T <- seq(0,100,.1)
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19, col=rgb(0,0,0,.5))
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19, col=rgb(0,0,0,.1))
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+plot(mycvm$Z, asp=1, cex=0.5, pch=19, col=rgb(0,0,0,.1))
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+T <- seq(0,100,.1)
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, cex=0.5, pch=19, col=rgb(0,0,0,.1))
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+tau <- 2
+T <- seq(0,1000,1)
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+nu <- 10
+tau <- 2
+v0 <- 10
+T <- seq(0,100,.1)
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, cex=0.5, pch=19, col=rgb(0,0,0,.1))
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+# coarser sampling
+tau <- 2
+T <- seq(0,1000,1)
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE, spline=TRUE)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",diagnose=TRUE)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="vaf",spline=TRUE)
+tau <- 1
+nu <- 8
+mycvm <- CVM2(T=1:1000, nu, tau)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="crw", diagnose=TRUE)
+tau <- 100
+mycvm <- CVM2(T=1:1000, nu, tau)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,method="crw", CI=TRUE, diagnose=TRUE)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="crw", diagnose=TRUE)
+mycvm <- CVM2(T=1:1000, nu, tau)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="crw", diagnose=TRUE)
+tau <- 1
+nu <- 8
+mycvm <- CVM2(T=1:1000, nu, tau)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="crw", diagnose=TRUE)
+tau <- 100
+mycvm <- CVM2(T=1:1000, nu, tau)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,method="crw", CI=TRUE, diagnose=TRUE)
+nu <- 10
+tau <- 3
+v0 <- 10
+# irregular timing
+T <- cumsum(rexp(1000,1/.1))
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="onestep", parameters=c("tau", "nu"))
+T <- cumsum(rexp(1000,1))
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="onestep", parameters=c("tau", "nu"))
+# improved with splining
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="onestep", parameters=c("tau", "nu"), spline=TRUE)
+T <- cumsum(rexp(100,1))
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+estimateCVM(mycvm$Z,mycvm$T,CI=TRUE,method="fullL")
+estimateCVM(mycvm$Z,mycvm$T,method="crawl")
+nutau <- Get.nutau(Fit.crawl)
+row.names(nutau) <- c("tau", "nu")
+T <- cumsum(rexp(1000,1))
+mycvm <- CVM2(T, nu, tau, v0)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19)
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19, col=rgb(0,0,0,.5))
+plot(mycvm$Z, asp=1, type="o", cex=0.5, pch=19, col=rgb(0,0,0,.2))
+estimateCVM(mycvm$Z,mycvm$T,method="crawl")
+library(cvm)
+?estimateCVM
+library(cvm)
+library(cvm)
+library(cvm)

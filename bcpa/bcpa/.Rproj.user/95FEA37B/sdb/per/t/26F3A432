@@ -1,0 +1,17 @@
+{
+    "contents" : "#' Phase plot of BCPA output\n#' \n#' Behavioral phase plot of BCPA output.  Mean and standard deviation are on the x and y axis.  Size and color of points represent the time scale of autocorrelation\n\n#' @param windowsweep \\code{windowsweep} object, i.e. the output of the \\code{\\link{WindowSweep}} function.\n#' @param type whether to plot smooth or flat bcpa output\n#' @param clusterwidth for flat BCPA, this is the temporal range within which change points are considered to be within the same cluster. \n#' @param ... additional arguments passed to the \\code{plot} base function.\n#' @param legend.where where to place the tau legend (see \\code{\\link{legend}}).\n#' @seealso \\code{\\link{WindowSweep}}, \\code{\\link{PartitionParameters}}\n#' @author Eliezer Gurarie\n#' @examples\n#' if(!exists(\"Simp.ws\"))\n#' {\n#'  data(Simp)\n#'  Simp.ws <- WindowSweep(GetVT(Simp), \"V*cos(Theta)\", windowsize = 50, windowstep = 1, progress=TRUE)\n#' }\n#' \n#' PhasePlot(Simp.ws)\n\nPhasePlot <- function(windowsweep, type = c(\"smooth\",\"flat\")[1], clusterwidth = 1, ..., legend.where=\"bottomright\")\n{\n  partition <- PartitionParameters(windowsweep, type, clusterwidth)\n  mu.hat <- partition$mu.hat\n  s.hat <- partition$s.hat\n  rho.hat <- partition$rho.hat\n  \n  if(type==\"smooth\")\n  {\n    rho.int <- round((rho.hat - min(rho.hat, na.rm=1))/(max(rho.hat, na.rm=1) - min(rho.hat, na.rm=1))*999+1)\n    palette(topo.colors(1000, alpha=0.5) )\n    \n    plot(mu.hat, s.hat, type=\"l\", col=\"grey\", xlab=expression(hat(mu)),  ylab=expression(hat(sigma)), ...)\n    points(mu.hat, s.hat, cex=sqrt((rho.hat - min(rho.hat, na.rm=1))/(max(rho.hat, na.rm=1) - min(rho.hat, na.rm=1))*4), \n           col=rho.int, pch=19)\n    legend(legend.where, pt.cex = sqrt(c(.5,1,2,4)), pch = 19, title=expression(hat(tau)), col = 250*c(.5,1,2,4), bty=\"n\",\n           legend=signif(seq(.2,1,length=4)*max(rho.hat, na.rm=TRUE),2))\n    palette(\"default\")\n    points(mu.hat[1], s.hat[1], pch=24, bg=\"darkgreen\", cex=2, col=\"darkgrey\")\n    points(mu.hat[length(mu.hat)], s.hat[length(mu.hat)], pch=23, bg=\"red\", cex=2,  col=\"darkgrey\")\n  }\n  \n  \n  if(type==\"flat\")\n  {\n    rho.int <- round((rho.hat - min(rho.hat, na.rm=1))/(max(rho.hat, na.rm=1) - min(rho.hat, na.rm=1))*999+1)\n    palette(topo.colors(1000, alpha=0.5) )\n    \n    N.reps <- as.vector(table(paste(mu.hat, s.hat, rho.hat)))\n    N.count <- rep(N.reps, N.reps)\n    \n    plot(mu.hat, s.hat, type=\"l\", col=\"grey\", xlab=expression(hat(mu)),  ylab=expression(hat(sigma)), ...)\n    points(mu.hat, s.hat, cex=sqrt(N.count), \n           col=rho.int, pch=19)\n    legend(legend.where, pt.cex =2, pch = 19, title=expression(hat(tau)), col = 250*c(.5,1,2,4), \n           legend=signif(seq(.2,1,length=4)*max(rho.hat, na.rm=TRUE),2))\n    palette(\"default\")\n  }\n}",
+    "created" : 1382513371677.000,
+    "dirty" : false,
+    "encoding" : "KOI8-R",
+    "folds" : "",
+    "hash" : "4052248129",
+    "id" : "26F3A432",
+    "lastKnownWriteTime" : 1412966415,
+    "path" : "~/programming/ecomove/bcpa/bcpa/R/PhasePlot.r",
+    "project_path" : "R/PhasePlot.r",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

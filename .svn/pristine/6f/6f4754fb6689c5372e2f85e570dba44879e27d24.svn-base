@@ -1,0 +1,44 @@
+\name{CVM}
+\alias{CVM}
+\title{Correlated velocity movement: OU Simulation}
+\usage{
+CVM(nu = 1, tau = 1, v0 = nu * exp((0+1i) * runif(1, 0, 2 * pi)),
+  Tmax = 10, dt = 0.1)
+}
+\arguments{
+  \item{nu}{mean speed of movement}
+
+  \item{tau}{characteristic time scale of movement}
+
+  \item{v0}{initial velocity vector.  Default is randomly
+  oriented vector with magnitude \code{nu}}
+
+  \item{Tmax}{max time}
+
+  \item{dt}{time interval of simulation}
+}
+\value{
+a list with the following elements \describe{\item{T}{the
+time vector} \item{V}{the (complex) vector of velocities}
+\item{Z}{the (complex) vector of locations} \item{X}{a 4xn
+matrix containing columns for, respectively, Vi, Zi, Vj and
+Zj where i and j refer to the x and y coordinates of the
+movement} \item{dt, tau, nu,vo}{the parameters of the
+model.}}
+}
+\description{
+Simulates 2D correlated velocity movement model
+}
+\details{
+This function simulates a CVM explicitly using the
+governing OU equation, using a discretization in which dt
+<< tau.  It is used primarily to simulate "true"
+trajectories against which other simulation/estimation
+routines can be tested.
+}
+\examples{
+nu <- 2; tau <- 5; dt <- .1; cvm <- CVM(nu, tau, Tmax = 1000, dt = dt)
+plot(cvm$Z, asp=1, type="l", main = "CVM(2,5)")
+title(sub = "0-1000 time units")
+}
+

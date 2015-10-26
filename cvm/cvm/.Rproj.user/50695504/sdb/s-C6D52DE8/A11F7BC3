@@ -1,0 +1,16 @@
+{
+    "contents" : "#' Correlated velocity movement: OU Simulation\n#' \n#' Simulates 2D correlated velocity movement model\n#' \n#' @details This function simulates a CVM explicitly using the governing OU equation, using a discretization in which dt << tau.   It is used primarily to simulate \"true\" trajectories against which other simulation/estimation routines can be tested. \n#' @param nu mean speed of movement\n#' @param tau characteristic time scale of movement\n#' @param v0 initial velocity vector.  Default is randomly oriented vector with magnitude \\code{nu}\n#' @param Tmax max time\n#' @param dt time interval of simulation\n#' @return a list with the following elements \\describe{\\item{T}{the time vector} \\item{V}{the (complex) vector of velocities} \\item{Z}{the (complex) vector of locations} \\item{X}{a 4xn matrix containing columns for, respectively, Vi, Zi, Vj and Zj where i and j refer to the x and y coordinates of the movement} \\item{dt, tau, nu,vo}{the parameters of the model.}}\n#' @examples\n#' nu <- 2; tau <- 5; dt <- .1; cvm <- CVM(nu, tau, Tmax = 1000, dt = dt)\n#' plot(cvm$Z, asp=1, type=\"l\", main = \"CVM(2,5)\")\n#' title(sub = \"0-1000 time units\") \n\n\nCVM <-\nfunction(nu = 1, tau=1, v0=nu*exp(1i*runif(1,0,2*pi)), Tmax=10, dt=.1)\n{\n  T <- seq(0,Tmax,dt)\n  n <- length(T)\n  V <- T*0\n  dW <- (rnorm(n) + 1i*rnorm(n))*sqrt(dt)\n  V[1] <- v0\n  for(i in 2:n)\n    V[i] <-  V[i-1] - V[i-1] * dt/tau + 2*nu/sqrt(pi*tau) * dW[i]              \n  Z <- cumsum(V)*dt\n  X <- cbind(Re(V), Re(Z), Im(V), Im(Z))\n  return(list(T = T, V = V, Z = Z, X = X, dt = dt, tau=tau, nu=nu, v0=v0))\n}\n",
+    "created" : 1419277122910.000,
+    "dirty" : false,
+    "encoding" : "WINDOWS-1252",
+    "folds" : "",
+    "hash" : "4231945081",
+    "id" : "A11F7BC3",
+    "lastKnownWriteTime" : 1419277172,
+    "path" : "~/Documents/ecomove/cvm/cvm/R/CVM.R",
+    "project_path" : "R/CVM.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

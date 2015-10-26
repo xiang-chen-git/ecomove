@@ -1,0 +1,60 @@
+\name{CVM}
+\alias{CVM}
+\alias{getSigma}
+\alias{getX,}
+\title{Correlated velocity movement: Exact Updating}
+\usage{
+CVM(T, nu = 1, tau = 1, v0 = nu * exp((0 + (0+1i)) * runif(1, 0, 2 * pi)))
+}
+\arguments{
+  \item{T}{vector of times}
+
+  \item{nu}{mean speed of movement}
+
+  \item{tau}{characteristic time scale of movement}
+
+  \item{v0}{initial velocity vector.  Default is randomly
+  oriented vector with magnitude \code{nu}}
+
+  \item{z0}{inital location.  Default 0.}
+}
+\value{
+a list with the following elements \describe{\item{T}{the
+time vector} \item{V}{the (complex) vector of velocities}
+\item{Z}{the (complex) vector of locations} \item{X}{a 4xn
+matrix containing columns for, respectively, Vi, Zi, Vj and
+Zj where i and j refer to the x and y coordinates of the
+movement} \item{dt, tau, nu,vo}{the parameters of the
+model.}}
+}
+\description{
+Simulates 2D correlated velocity movement model for
+arbitrary time intervals, using the "exact" updating
+formulae of Gillespie (1996).
+}
+\details{
+This function simulates a CVM explicitly using the
+governing OU equation, using a discretization in which dt
+<< tau.  It is used primarily to simulate "true"
+trajectories against which other simulation/estimation
+routines can be tested.
+}
+\examples{
+# sampling 100 random times up to (about) 1000:
+T <- cumsum(rexp(100)*10)
+# Simulate
+CVM <- CVM(T, nu=2, tau=5)
+# Illustrate
+layout(rbind(c(1,3,3,2), c(1,4,4,2)))
+par(bty="l", oma=c(0,0,4,0))
+plot(CVM$V, type="l", asp=1, main="Velocity", xlab="", ylab="", col="darkgrey")
+points(CVM$V, pch=19, cex=0.5)
+plot(CVM$Z, type="l", main="Position", asp=1, col="darkgrey")
+points(CVM$Z, pch=19, cex=0.5)
+plot(CVM$T, Re(CVM$V), col=2, type="l", main="Velocity (decomposed)", ylim=range(c(Re(CVM$V), Im(CVM$V))))
+lines(CVM$T, Im(CVM$V), col=3, type="l")
+plot(CVM$T, Re(CVM$Z), col=2, type="l", main="Position (decomposed)", ylim=range(c(Re(CVM$Z), Im(CVM$Z))))
+lines(CVM$T, Im(CVM$Z), col=3, type="l")
+title("CVM(2, 5): 0-1000, 100 random samples", outer=TRUE, cex=1.5)
+}
+

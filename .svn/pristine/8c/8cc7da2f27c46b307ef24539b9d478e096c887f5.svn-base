@@ -1,0 +1,24 @@
+\name{MakeLetter}
+\alias{MakeLetter}
+\title{Make Letter}
+\usage{
+MakeLetter(text, where = "topleft", cex = 2, ...)
+}
+\arguments{
+  \item{text}{text to add (e.g. "a.", "b.", etc.)}
+
+  \item{where}{one of "topleft", "top", "topright", etc.}
+
+  \item{cex}{Size expansion of text.}
+
+  \item{...}{additional parameters to pass to
+  \code{\link{legend}}}
+}
+\description{
+Quick and dirty figure annotator.
+}
+\details{
+Annotate a figure with any expression - basically just the
+title of an empty, boxless legend.
+}
+

@@ -1,0 +1,208 @@
+Wild Forest Reindeer Analysis
+========================================================
+	
+### Preparation
+Get the results, load packages, etc.
+```{r, message=FALSE, warning=FALSE}
+require(waddle)
+require(mrw)
+data(WFR.Data)
+data(WFR.VT)
+data(WFR.singleState)
+data(WFR.doubleState)
+data(WFR.doubleStateSwitch)
+data(WFR.tripleStateSwitch)
+```
+
+Data
+-------------------------
+```{r, echo=FALSE}
+data(WFR)
+print("Table of number of gaps of different sizes (in hours)")
+table(round(diff(as.POSIXct(WFR$Time))/60))
+```
+Again we have to interpolate the data in order to get a regular time series. Most of the data is every few hours, but there are gaps up to 8 days. If we chose to interpolate with a daily interval, this will create several linear pieces of the trajectory where there are multiday gaps. Because of this problem Bovet and Benhamou (1988) recommend, "Note, however, that the size of the rediscretization step R chosen should not be shorter than half of the longest recorded step, so as to avoid artefactual alignments of points." Other options include truncating the time series to avoid the gaps or to interpolate with a larger time interval, both of which discard a lot of the data. We compare these below.
+
+The wild forest reindeer data with original data points are shown in black and the interpolated points in red for the 'naive' option of a daily time step for the entire series. The introduced linear segments are clearly seen.
+```{r, echo=FALSE}
+data(WFR)
+print("Table of number of gaps of different sizes (in hours)")
+table(round(diff(as.POSIXct(WFR$Time))/60))
+WFR2 <- InterpolatePoints(WFR, n = 1, units = "day", id = "WFR")$Data
+plot(WFR$X, WFR$Y, type = "o", asp = 1, pch = 19, col = rgb(0, 0, 0, 0.3), xlab = "X", ylab = "Y")
+points(WFR2$X, WFR2$Y, type = "o", pch = 19, col = rgb(1, 0, 0, 0.5))
+```
+
+We could also just truncate the time series at the gaps in order to use the data every 4 hours, which gives us high resolution data, but omits large sections of the trajectory and reduces the spatial extent.
+```{r, echo=FALSE}
+which(diff(WFR$Time)/60 > 4.1)
+diff(which(diff(WFR$Time)/60 > 4.1))
+# note that a section of the middle of this time series has data every 2 hours, so we interpolat to 4-hour steps
+WFR3 <- InterpolatePoints(WFR[3418:4781,], n = 4, units = "hour", id = "WFR")$Data
+plot(WFR$X, WFR$Y, type = "o", asp = 1, pch = 19, col = rgb(0, 0, 0, 0.3), xlab = "X", ylab = "Y")
+points(WFR3$X, WFR3$Y, type = "o", pch = 19, col = rgb(0, 1, 1, 0.3))
+```
+
+Next we interpolate for a daily time step for the truncated series elimating gaps over 2 days first. Interestingly, this is almost entirely disjoint from the previous example of truncating the time series at the gaps.
+```{r, echo=FALSE}
+print("Indices of gaps over 2 days")
+which(diff(WFR$Time)/60/24 > 2)
+WFR4 <- InterpolatePoints(WFR[1354:3249,], n = 1, units = "day", id = "WFR")$Data
+plot(WFR$X, WFR$Y, type = "o", asp = 1, pch = 19, col = rgb(0, 0, 0, 0.3), xlab = "X", ylab = "Y")
+points(WFR4$X, WFR4$Y, type = "o", pch = 19, col = rgb(0, 1, 0, 0.5))
+```
+
+We can also interpolate every 100 hours (half the longest gap of 200 hours). While this includes the entire spatial and temporal extent of the data, the scale is much coarser, which changes the types of questions these data could be used to address.
+```{r, echo=FALSE}
+WFR5 <- InterpolatePoints(WFR, n = 100, units = "hour", id = "WFR")$Data
+plot(WFR$X, WFR$Y, type = "o", asp = 1, pch = 19, col = rgb(0, 0, 0, 0.3), xlab = "X", ylab = "Y")
+points(WFR.Data$X, WFR.Data$Y, type = "o", pch = 19, col = rgb(0, 0, 1, 0.5))
+```
+
+While any of these approaches to tuncating and interpolating the data are valid, which one to choose depends on what questions one is trying to ask of the data. In the interests of using being able to compare results with the other methods, we use the entire time series and use a 2 day interpolation interval. In order to mitigate teh linear segments introduced by the longest gaps, we jitter the interpolated points using the gap-specific step length.
+
+```{r, echo=FALSE}
+plot(WFR$X, WFR$Y, type = "o", asp = 1, pch = 19, col = rgb(0, 0, 0, 0.3), xlab = "X", ylab = "Y")
+points(WFR5$X, WFR5$Y, type = "o", pch = 19, col = rgb(1, 0, 1, 0.5))
+```
+
+
+Single state model
+-------------------------
+The single state model is simply a correlated random walk using a Weibull for the step lengths and a wrapped Cauchy for the turning angle. There is no evidence on non-convergence.
+```{r}
+analyzeConvergence(WFR.singleState)
+```
+
+As expected, we get the same parameter estimates using maximum likihood compared to the Bayesian MCMC approach using JAGS.
+```{r}
+require(stats4)
+
+likelihood <- function(a, b, mu, rho, step, theta)
+{
+	stepLike = dweibull(step, shape = a, scale = b)
+	thetaLike = dwrpcauchy(theta, mu = mu, rho = rho)
+	negLogLike <- -1 * sum(log(stepLike), log(thetaLike))
+	return(negLogLike)
+}
+
+est <- mle(likelihood, start = list(a = 1, b = 1, mu = 0, rho = 0.5), fixed = list(step = WFR.VT$S, theta = WFR.VT$Theta),
+		   lower = c(0.001, 0.001, -pi, 0), upper = c(Inf, Inf, pi, 1), method = "L-BFGS-B")
+summary(est)
+
+plotSingleStateDistributions(WFR.singleState, WFR.VT$S, WFR.VT$Theta)
+```
+
+The fit of the step distribution for a single state is good (i.e. compared to the lamprey data), though the turning angle distribution looks more bimodal than uniform. We can also consider 2 or more states. 
+
+Double state model
+-------------------------
+First we use a model with 2 states, but no persistance, that is each step is independently assigned to one of two correlated random walks. There is no evidence of non-convergence.
+
+```{r}
+analyzeConvergence(WFR.doubleState)
+```
+
+We can look at how the steps are assigned to states. Here, state 1 corresponds to the sedentary state and state 2 corresponds to the active state. There are frequent switches between states.
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2),mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(WFR.doubleState)
+plotStateProbabilities(WFR.doubleState)
+```
+
+There is overlap between the step distributions and the states seem to be differentiated by the turning angles with those near 0 being assigned to the active state. Both states' step distributions appear to be resonably well fit by the Weibull distribution, though state 2 may lack sufficient small steps.
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotDoubleStateDistributions(WFR.doubleState, WFR.VT$S, WFR.VT$Theta)
+```
+
+Double state switch model
+-------------------------
+Now we can look at the hidden Markov model, in which there are 2 states (mixture of two correlated random walks) with a matrix of probabilities for remaining in the current state or switching to a different state. There is no evidence of non-convergence.
+
+```{r}
+analyzeConvergence(WFR.doubleStateSwitch)
+```
+
+The state assignment is not as definite as the Lamprey data, though most states are assigned with a high probability. There are many fewer state transitions, with most of the trajectory being in state 1 punctuated by short and long bouts in state 2.
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(WFR.doubleStateSwitch)
+plotStateProbabilities(WFR.doubleStateSwitch)
+```
+
+The step distributions are overlapping, though smaller steps are more likely to be assigned to teh sedentary state and vice versa. The turning angle distributions are similar and widely distributed (small rho), though the more active state with larger steps does have more directionality.
+
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotDoubleStateDistributions(WFR.doubleStateSwitch, WFR.VT$S, WFR.VT$Theta)
+```
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+plot(WFR.VT$Z.start, type = "o", asp = 1, pch = 19, col = c("red", "blue")[getModeStates(WFR.doubleStateSwitch)], xlab = "X", ylab = "Y")
+```
+
+The transition matrix.
+```{r}
+getTransitionMatrix(WFR.doubleStateSwitch)
+```
+
+Triple state switch model
+-------------------------
+Finally, we can examine the triple state switching model, to see if there is any evidence of another state. The model appears to have converged (there are 2 values of Geweke's statistic out of the 95% CI, though this is nearly 5%).
+```{r}
+analyzeConvergence(WFR.tripleStateSwitch)
+```
+
+In the triple switch model, the active state from the double state switch model is similar to state 3, whicle the sedentary state is divided into states 1 and 2.
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(WFR.tripleStateSwitch, nstates = 3)
+plotStateProbabilities(WFR.tripleStateSwitch)
+```
+
+The two more sedentaty states have similar mostly uniform turning angle distributions but diferent step sizes. The active state with the largest steps has a more straight ahead tuning anle distribution. Looking at the track, the active state connects the different areas of concentrated use, where the slowest sedentary state is concentrated in a few locations around which are the faster sedentary state.
+
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mfrow = c(2,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotTripleStateDistributions(WFR.tripleStateSwitch, WFR.VT$S, WFR.VT$Theta)
+```
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+plot(WFR.VT$Z.start, type = "o", asp = 1, pch = 19, col = c("red", "blue", "yellow")[getModeStates(WFR.tripleStateSwitch)], xlab = "X", ylab = "Y")
+```
+
+The transition matrix.
+```{r}
+getTransitionMatrix(WFR.tripleStateSwitch, nstates = 3)
+```
+
+Change point comparison
+-------------------------
+There are many change points, especially for the double state model. The change points for the double state switch model are nearly a subset of the double state model and the triple state switch model (though some of the indicies are off by 1). 
+```{r}
+cbind(WFR.VT, state = getModeStates(WFR.doubleState))[
+  which(diff(getModeStates(WFR.doubleState)) != 0), c(3:5, 10:12)]
+cbind(WFR.VT, state = getModeStates(WFR.doubleStateSwitch))[
+  which(diff(getModeStates(WFR.doubleStateSwitch)) != 0), c(3:5, 10:12)]
+cbind(WFR.VT, state = getModeStates(WFR.tripleStateSwitch))[
+  which(diff(getModeStates(WFR.tripleStateSwitch)) != 0), c(3:5, 10:12)]
+
+setdiff(which(diff(getModeStates(WFR.doubleStateSwitch)) != 0), 
+        rep(which(diff(getModeStates(WFR.doubleState)) != 0), each = 3) + -1:1)
+setdiff(which(diff(getModeStates(WFR.doubleStateSwitch)) != 0), 
+        rep(which(diff(getModeStates(WFR.tripleStateSwitch)) != 0), each = 3) + -1:1)
+```
+
+Model comparison
+-------------------------
+We can compare models using DIC (a function of the deviance and the estimated number of parameters, pD). DIC would support selecting the double state switch model.
+```{r}
+getDIC(list(WFR.singleState, WFR.doubleState, WFR.doubleStateSwitch, WFR.tripleStateSwitch))
+```

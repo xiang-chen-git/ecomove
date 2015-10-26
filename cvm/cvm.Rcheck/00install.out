@@ -1,0 +1,29 @@
+* installing *source* package ‘cvm’ ...
+** libs
+clang++ -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I/usr/local/include -I/usr/local/include/freetype2 -I/opt/X11/include -I"/Library/Frameworks/R.framework/Versions/3.1/Resources/library/Rcpp/include" -I"/Library/Frameworks/R.framework/Versions/3.1/Resources/library/RcppArmadillo/include"   -fPIC  -Wall -mtune=core2 -g -O2  -c Mahalanobis.cpp -o Mahalanobis.o
+clang++ -I/Library/Frameworks/R.framework/Resources/include -DNDEBUG  -I/usr/local/include -I/usr/local/include/freetype2 -I/opt/X11/include -I"/Library/Frameworks/R.framework/Versions/3.1/Resources/library/Rcpp/include" -I"/Library/Frameworks/R.framework/Versions/3.1/Resources/library/RcppArmadillo/include"   -fPIC  -Wall -mtune=core2 -g -O2  -c RcppExports.cpp -o RcppExports.o
+clang++ -dynamiclib -Wl,-headerpad_max_install_names -undefined dynamic_lookup -single_module -multiply_defined suppress -L/usr/local/lib -o cvm.so Mahalanobis.o RcppExports.o -L/Library/Frameworks/R.framework/Resources/lib -lRlapack -L/Library/Frameworks/R.framework/Resources/lib -lRblas -L/usr/local/lib/gcc/x86_64-apple-darwin13.0.0/4.8.2 -lgfortran -lquadmath -lm -F/Library/Frameworks/R.framework/.. -framework R -Wl,-framework -Wl,CoreFoundation
+installing to /Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/cvm/libs
+** R
+** data
+** inst
+** preparing package for lazy loading
+Warning: package ‘mvtnorm’ was built under R version 3.1.2
+Warning: package ‘Rcpp’ was built under R version 3.1.1
+Warning: package ‘RcppArmadillo’ was built under R version 3.1.2
+Warning: package ‘sp’ was built under R version 3.1.2
+Warning: package ‘raster’ was built under R version 3.1.1
+** help
+Warning: /Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/00_pkg_src/cvm/man/cvm-package.Rd:33: All text must be in a section
+Warning: /Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/00_pkg_src/cvm/man/cvm-package.Rd:34: All text must be in a section
+Warning: /Users/dukechan/Documents/ecomove/cvm/cvm.Rcheck/00_pkg_src/cvm/man/diagnoseSTANfit.Rd:10: unexpected macro '\link', expecting '{'
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+Warning: package ‘mvtnorm’ was built under R version 3.1.2
+Warning: package ‘Rcpp’ was built under R version 3.1.1
+Warning: package ‘RcppArmadillo’ was built under R version 3.1.2
+Warning: package ‘sp’ was built under R version 3.1.2
+Warning: package ‘raster’ was built under R version 3.1.1
+* DONE (cvm)

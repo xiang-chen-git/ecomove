@@ -1,0 +1,17 @@
+{
+    "contents" : "%\\VignetteEngine{knitr::knitr}\n%\\VignetteIndexEntry{Correlated velocity movement}\n\n\\documentclass{article}\n\\title{cvm vignettes}\n\\author{xiang,elie}\n\\date{\\today}\n\\begin{document}\n\n\\maketitle \n\nFirst, we loard the package:\n<<loading_cvm,warning=FALSE,message=FALSE>>=\nrequire(cvm)\n@\nSimulate and plot a CVM($\\nu,\\tau$?) process\n<<FirstPlot>>=\nnu <- 2\ntau <- 5\ndt <- .1 \ncvm <- CVM(nu, tau, Tmax = 1000, dt = dt)\nplot(cvm$Z, asp=1, type=\"l\", main = \"CVM(2,5)\")\ntitle(sub = \"0-1000 time units\")\n@\n\n\n\\end{document}",
+    "created" : 1419279790811.000,
+    "dirty" : false,
+    "encoding" : "WINDOWS-1252",
+    "folds" : "",
+    "hash" : "3391604954",
+    "id" : "32056F91",
+    "lastKnownWriteTime" : 1419281561,
+    "path" : "~/Documents/ecomove/cvm/cvm/vignettes/cvm.Rnw",
+    "project_path" : "vignettes/cvm.Rnw",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "sweave"
+}

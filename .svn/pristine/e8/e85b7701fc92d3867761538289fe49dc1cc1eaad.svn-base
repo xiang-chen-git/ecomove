@@ -1,0 +1,23 @@
+\name{LikelihoodScan}
+\alias{LikelihoodScan}
+\title{Likelihood scan function}
+\usage{
+LikelihoodScan(Z, T, nu, tau, v0, FUN, ...)
+}
+\arguments{
+  \item{Z}{track}
+
+  \item{T}{times of observation}
+
+  \item{nu,tau,v0}{median-ish values of 'nu', 'tau' and
+  'v0' around which to scan}
+
+  \item{FUN}{a likelihood functions to scan}
+}
+\description{
+returns a list of three vectors: ll.nu, ll.tau. ll.v0 of
+the likelihoods computed over the values of the respective
+vector, the other 2 parameters remaining fixed at the
+respective fixed value.
+}
+

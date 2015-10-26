@@ -1,0 +1,8 @@
+# To Do List for bcpa
+
+1) Make a function that creates a "track" object from entering "X", "Y", "Time". `BuildTrack(X,Y,T)`. 
+
+2) Clean NA's in the `BuildTrack` function
+3) Make `PhasePlot()` function. 
+
+4) change "interval" to "duration" in `ChangePointSummary`

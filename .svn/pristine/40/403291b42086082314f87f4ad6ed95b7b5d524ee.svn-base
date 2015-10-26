@@ -1,0 +1,17 @@
+{
+    "contents" : "setwd(\"c:/eli/research/EstimatingCVM\")\nsource(\"./code/Functions05_SamplingFunctions.r\")\n\nPhyllis <- read.csv(\"./data/BowheadData3.csv\")\n\n\nhead(Phyllis)\nPhyllis$DateTime <- as.POSIXct(Phyllis$DateTime)\nPhyllis$Date <- NULL\nPhyllis$WhaleID <- NULL\nPhyllis$RID <- NULL\nPhyllis <- Phyllis[,c(3,1:2,4:ncol(Phyllis))]\n\nPhyllis$Hours <- as.numeric(difftime(Phyllis$DateTime, Phyllis$DateTime[1], units=\"hours\"))\n\n# Filter too close intervals\nfilter <- which(diff(Phyllis$Hours) < 0.09)\nPhyllis <- Phyllis[-filter,]\n\n# filter one hyper large velocity\nfilter <- with(Phyllis, which(Mod(diff(z.km)/diff(Hours)) > 10)+1)\nPhyllis <- Phyllis[-filter,]\n\n# delete last chunk of data with very large intervals\nPhyllis <- Phyllis[1:954,]\n\n\nBowhead <- Phyllis\nsave(Bowhead, file= \"c:/eli/programming/ecomove/cvm/cvm/data/Bowhead.rda\")\n",
+    "created" : 1411498261378.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3795991844",
+    "id" : "4CECAAE1",
+    "lastKnownWriteTime" : 1410966041,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

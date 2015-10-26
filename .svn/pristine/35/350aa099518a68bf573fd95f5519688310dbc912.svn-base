@@ -1,0 +1,16 @@
+{
+    "contents" : "#' Partition parameters \n#' \n#' Partitions - and, ultimately, estimates - all parameters of a BCPA, either as a rolling average (smooth BCPA), or as constant values within fixed change points (flat BCPA).\n#' \n#' @param windowsweep a \\code{windowsweep} object, i.e. the output of the \\code{\\link{WindowSweep}} function.\n#' @param type type of estimate to output, whether \"smooth\" or \"flat\".\n#' @param clusterwidth the temporal range within which changepoints are considered to be within the same cluster (for a \"smooth\" BCPA).\n#' @return a data frame containing the three estimates: \\code{mu.hat}, \\code{s.hat}, \\code{rho.hat}.\n#' \n#' @author Eliezer Gurarie\n#' @seealso used in \\code{\\link{ChangePointSummary}} and \\code{\\link{PhasePlot}}\n\n\nPartitionParameters <-\nfunction(windowsweep, type = c(\"smooth\",\"flat\")[1], clusterwidth = 1)\n{\n  if(type == \"smooth\" & !(\"pp.smooth\" %in% names(windowsweep)))\n  {\n    x <- windowsweep$x\n    t <- windowsweep$t \n    windowsize <- windowsweep$windowsize\n    windowstep <- windowsweep$windowstep\n    ws <- data.frame(windowsweep$ws)\n    \n    low <- seq(1, (length(t) - windowsize), windowstep)\n    high <- low + windowsize\n    \n    n.col<-length(t)\n    n.row<-dim(ws)[1]\n    \n    mu.M <- matrix(NA,n.row,n.col)\n    s.M <- matrix(NA,n.row,n.col)\n    rho.M <- matrix(NA,n.row,n.col)\n    \n    for(i in 1:n.row)\n    {\n      myws<-ws[i,]\n      dts <- abs(t-myws$Break)\n      tbreak <- match(min(dts),dts)\n      \n      max <- min(n.col,high[i])\n      \n      mu.M[i,low[i]:tbreak] <- myws$mu1\n      mu.M[i,(tbreak+1):max] <- myws$mu2\n      s.M[i,low[i]:tbreak] <- myws$s1\n      s.M[i,(tbreak+1):max] <- myws$s2\n      rho.M[i,low[i]:tbreak] <- myws$rho1\n      rho.M[i,(tbreak+1):max] <- myws$rho2\n    }\n    \n    adjust <- colSums(!is.na(mu.M))\n    \n    mu.hat<-colSums(mu.M,na.rm=1)/adjust\n    s.hat<-colSums(s.M,na.rm=1)/adjust\n    rho.hat<-colSums(rho.M,na.rm=1)/adjust\n  } else\n  {\n    mu.hat <- windowsweep$pp$mu.hat\n    s.hat <- windowsweep$pp$s.hat\n    rho.hat <- windowsweep$pp$rho.hat\n  }\n\n  if(type == \"flat\")\n  {\n    x <- windowsweep$x \n    t <- windowsweep$t\n    phases <- ChangePointSummary(windowsweep, clusterwidth)$phases             \n \n    whichphase <- findInterval(t, phases$t0)\n    \n    mu.hat <- phases$mu.hat[whichphase]\n    rho.hat <-  phases$rho.hat[whichphase]\n    s.hat <-  phases$s.hat[whichphase]\n  }\n\n  return(data.frame(mu.hat,s.hat,rho.hat))\n}\n",
+    "created" : 1414905114241.000,
+    "dirty" : false,
+    "encoding" : "KOI8-R",
+    "folds" : "",
+    "hash" : "2405456996",
+    "id" : "2BA1AF54",
+    "lastKnownWriteTime" : 1374760396,
+    "path" : "~/programming/ecomove/bcpa/bcpa/R/PartitionParameters.R",
+    "project_path" : "R/PartitionParameters.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

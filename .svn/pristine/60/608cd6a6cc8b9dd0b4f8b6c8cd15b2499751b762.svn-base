@@ -1,0 +1,153 @@
+Lamprey Analysis
+========================================================
+
+### Preparation
+Get the results, load packages, etc.
+```{r, message=FALSE, warning=FALSE}
+require(waddle)
+require(mrw)
+data(Lamprey.Data)
+data(Lamprey.VT)
+data(Lamprey.singleState)
+data(Lamprey.doubleState)
+data(Lamprey.doubleStateSwitch)
+data(Lamprey.tripleStateSwitch)
+```
+
+
+Data
+-------------------------
+
+To fit a correlated random walk (or a mixture thereof) the steps must equally spaced time intervals, so we interpolate the Lamprey data to meet these requirements. Interpolating every 120 sec. (most observations are separated by 1 or 2 minutes, though the longest gap is 7 minutes) gives 338 data points (slightly less than the smoothed data used in the other analysis). Original data points are shown in black and the interpolated points in red.
+```{r, echo=FALSE}
+data(Lamprey)
+plot(Lamprey$X, Lamprey$Y, type = "o", asp = 1, pch = 19, col = rgb(0, 0, 0, 0.3), xlab = "X", ylab = "Y")
+points(Lamprey.Data$X, Lamprey.Data$Y, type = "p", pch = 19, col = rgb(1, 0, 0, 0.5))
+```
+
+Single state model
+-------------------------
+The single state model is simply a correlated random walk using a Weibull for the step lengths and a wrapped Cauchy for the turning angle. There is no evidence on non-convergence.
+```{r}
+analyzeConvergence(Lamprey.singleState)
+```
+ 
+As expected, we get the same parameter estimates using maximum likihood compared to the Bayesian MCMC approach using JAGS.
+```{r, fig.width=8, fig.height=4}
+require(stats4)
+
+likelihood <- function(a, b, mu, rho, step, theta)
+{
+	stepLike = dweibull(step, shape = a, scale = b)
+	thetaLike = dwrpcauchy(theta, mu = mu, rho = rho)
+	negLogLike <- -1 * sum(log(stepLike), log(thetaLike))
+	return(negLogLike)
+}
+
+est <- mle(likelihood, start = list(a = 1, b = 1, mu = 0, rho = 0.5), fixed = list(step = Lamprey.VT$S, theta = Lamprey.VT$Theta),
+		lower = c(0.001, 0.001, -pi, 0), upper = c(Inf, Inf, pi, 1), method = "L-BFGS-B")
+summary(est)
+
+plotSingleStateDistributions(Lamprey.singleState, Lamprey.VT$S, Lamprey.VT$Theta)
+```
+
+Here we see the fit for the steps is not great, given the large number of very small steps. Instead, the steps look like a mixture of two distributions, and it seems reasonable to consider the movement being made up of 2 or more states. 
+
+Double state model
+-------------------------
+First we use a model with 2 states, but no persistance, that is each step is independently assigned to one of two correlated random walks. There is some evidence of autocorrelation in a few parameters.
+
+```{r}
+analyzeConvergence(Lamprey.doubleState)
+```
+
+We can look at how the steps are assigned to states. Here, state 1 corresponds to the active state and state 2 corresponds to the sedentary state. The beginning and end of the trajectory are assigned to the active state, as well as some steps in the middle sedentary phase.
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2),mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(Lamprey.doubleState)
+plotStateProbabilities(Lamprey.doubleState)
+```
+
+Next we can examine the assignment of steps and turning angles to each state. The larger steps were assigned to the active state, while the small steps were assigned to the sedentary state, with only a small degree of overlap. There is more overlap in turning angle distributions between states, though turning angle near 0 (straight ahead) are mostly assigned to the active state and those near pi (reverse course) mostly assigned to the sedentary state.
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotDoubleStateDistributions(Lamprey.doubleState, Lamprey.VT$S, Lamprey.VT$Theta)
+```
+
+Double state switch model
+-------------------------
+Now we can look at the hidden Markov model, in which there are 2 states (mixture of two correlated random walks) with a matrix of probabilities for remaining in the current state or switching to a different state. There is no evidence of non-convergence.
+
+```{r}
+analyzeConvergence(Lamprey.doubleStateSwitch)
+```
+
+The state assignment is very definite, in that the probability of being in a particular state is always near 1. Again, the beginning and end are in the active state (state 1), but now with only a single brief blip in the middle also assigned to the active state.
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(Lamprey.doubleStateSwitch)
+plotStateProbabilities(Lamprey.doubleStateSwitch)
+```
+
+Again the states appear to be separated by both step size and turning angle, with more by step size with the larger steps being assigned to the active state and the smaller steps to the sedentary state. The separation of straight ahead and reverse turning angles is stronger than in the double state model.
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotDoubleStateDistributions(Lamprey.doubleStateSwitch, Lamprey.VT$S, Lamprey.VT$Theta)
+```
+
+The transition matrix.
+```{r}
+getTransitionMatrix(Lamprey.doubleStateSwitch)
+```
+
+Triple state switch model
+-------------------------
+Finally, we can examine the triple state switching model, to see if there is any evidence of another state. There is no evidence of non-convergence.
+```{r}
+analyzeConvergence(Lamprey.tripleStateSwitch)
+```
+
+The active state (state 1) is very similar to the active state in the double state switch model, and the sedentary state is broken into two states.
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow = c(1,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotStatesCompare(Lamprey.tripleStateSwitch, nstates = 3)
+plotStateProbabilities(Lamprey.tripleStateSwitch)
+```
+
+The active state parameters are very similar to the double state switch model. The two sedentary states consist of a state with small steps in all directions (state 2) and a state with larger steps and direction reversals (state 3).
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+par(mfrow = c(2,2), mar = c(3, 3, 2.5, 0) + 0.1, mgp = c(2, 0.5, 0))
+plotTripleStateDistributions(Lamprey.tripleStateSwitch, Lamprey.VT$S, Lamprey.VT$Theta)
+```
+
+```{r, fig.width=8, fig.height=8, echo=FALSE}
+plot(Lamprey.VT$Z.start, type = "o", asp = 1, pch = 19, col = c("red", "blue", "yellow")[getModeStates(Lamprey.tripleStateSwitch)], xlab = "X", ylab = "Y")
+```
+
+The transition matrix.
+```{r}
+getTransitionMatrix(Lamprey.tripleStateSwitch, nstates = 3)
+```
+
+Change point comparison
+-------------------------
+Looking at where each model identifies changes from one behavior state to the next, we see that the double state switching model has the fewest changepoints, and is a subset of both the double state and triple state switch models. Interestingly, the triple state switch model has the most changepoints, even though te double state model includes no persistence, so there is less constraining state assignment.
+```{r}
+cbind(Lamprey.VT, state = getModeStates(Lamprey.doubleState))[which(diff(getModeStates(Lamprey.doubleState)) != 0), 
+                                                              c(3:5, 10:12)]
+cbind(Lamprey.VT, state = getModeStates(Lamprey.doubleStateSwitch))[which(diff(getModeStates(Lamprey.doubleStateSwitch)) != 0), 
+                                                                    c(3:5, 10:12)]
+cbind(Lamprey.VT, state = getModeStates(Lamprey.tripleStateSwitch))[which(diff(getModeStates(Lamprey.tripleStateSwitch)) != 0), 
+                                                                    c(3:5, 10:12)]
+```
+
+Model comparison
+-------------------------
+We can compare models using DIC (a function of the deviance and the estimated number of parameters, pD). DIC would support selecting the triple state switch model.
+```{r}
+getDIC(list(Lamprey.singleState, Lamprey.doubleState, Lamprey.doubleStateSwitch, Lamprey.tripleStateSwitch))
+```

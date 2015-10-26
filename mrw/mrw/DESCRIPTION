@@ -1,0 +1,10 @@
+Package: mrw
+Type: Package
+Title: Multi-state Random Walk Results, Plotting and Processing functions
+Version: 0.01
+Date: 2013-06-02
+Author: Chloe Bracis
+Maintainer:  Chloe Bracis <cbracis@uw.edu>
+Description: More about what it does (maybe more than one line)
+License: Unlimited
+Depends: coda, rjags, R2jags, plyr, CircStats

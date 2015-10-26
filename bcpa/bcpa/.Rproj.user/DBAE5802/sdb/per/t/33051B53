@@ -1,0 +1,17 @@
+{
+    "contents" : "#' Make Track\n#'\n#' Simple convenience function for creating a \\code{track} class object from X-Y-Time movement data. A \\code{track} class object can be conveniently plotted and analyzed within \\code{bcpa}.\n#' \n#' @param X vector of X locations\n#' @param Y vector of Y locations\n#' @param Time vector of time (can be POSIX)\n#' @return a \\code{track} class data frame, with three columns: \\code{X}, \\code{Y} and \\code{Time}.\n#' @seealso plot.track\n#' @examples \n#' X <- cumsum(arima.sim(n=100, model=list(ar=0.8)))\n#' Y <- cumsum(arima.sim(n=100, model=list(ar=0.8)))\n#' Time <- 1:100\n#' mytrack <- MakeTrack(X,Y,Time)\n#' plot(mytrack)\n\nMakeTrack <- function(X, Y, Time)\n{\n  MyTrack <- data.frame(Time = Time, X = X, Y = Y)\n  class(MyTrack) <- c(\"track\", \"data.frame\")\n  return(MyTrack)\n}",
+    "created" : 1414899764449.000,
+    "dirty" : false,
+    "encoding" : "KOI8-R",
+    "folds" : "",
+    "hash" : "4184641654",
+    "id" : "33051B53",
+    "lastKnownWriteTime" : 1414906728,
+    "path" : "~/programming/ecomove/bcpa/bcpa/R/MakeTrack.R",
+    "project_path" : "R/MakeTrack.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,79 @@
+
+R version 3.1.0 (2014-04-10) -- "Spring Dance"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin13.1.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "cvm"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> library('cvm')
+Loading required package: MASS
+Loading required package: Matrix
+Loading required package: mvtnorm
+Warning: package ‘mvtnorm’ was built under R version 3.1.2
+Loading required package: Rcpp
+Warning: package ‘Rcpp’ was built under R version 3.1.1
+Loading required package: RcppArmadillo
+Warning: package ‘RcppArmadillo’ was built under R version 3.1.2
+Loading required package: CircStats
+Loading required package: boot
+Loading required package: nlme
+Loading required package: numDeriv
+Loading required package: crawl
+Loading required package: sp
+Warning: package ‘sp’ was built under R version 3.1.2
+Loading required package: raster
+Warning: package ‘raster’ was built under R version 3.1.1
+
+Attaching package: ‘raster’
+
+The following object is masked from ‘package:nlme’:
+
+    getData
+
+The following objects are masked from ‘package:MASS’:
+
+    area, select
+
+crawl 1.4-1 (2013-7-13) 
+ Type 'demo(package='crawl')' to see a list of demos for this package.
+ The raw code for the demos can be found by typing 'system.file('demo', package='crawl')'
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("Bowhead")
+> ### * Bowhead
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Bowhead
+> ### Title: Bowhead GPS data
+> ### Aliases: Bowhead
+> ### Keywords: datasets
+> 
+> ### ** Examples
+> 
+> data(Bowhead)
+> 
+> # googlemap (requires internet access)
+> require(ggmap)
+Loading required package: ggmap
+Warning in library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called ‘ggmap’
+> DiskoBay <- get_map(location = c(-53.4, 69), maptype = "terrain", zoom=8)
+Error: could not find function "get_map"
+Execution halted

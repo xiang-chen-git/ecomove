@@ -1,0 +1,16 @@
+{
+    "contents" : "Package: cvm\nType: Package\nTitle: Functions and methods for simulating and estimating continuous velocity movement models.  \nVersion: 0.11\nDate: 2014-12-22\nAuthor: Eliezer Gurarie\nMaintainer: <eliezg@uw.edu>\nDescription: ...\nLicense: Unlimited\nDepends: MASS, Matrix, mvtnorm, Rcpp (>= 0.10.4), RcppArmadillo (>= 0.3.900.0), CircStats, nlme, numDeriv, crawl\nLinkingTo: Rcpp, RcppArmadillo\nVignetteBuilder: knitr",
+    "created" : 1419275144988.000,
+    "dirty" : false,
+    "encoding" : "WINDOWS-1252",
+    "folds" : "",
+    "hash" : "2872568072",
+    "id" : "7DBF8CA3",
+    "lastKnownWriteTime" : 1419280977,
+    "path" : "~/Documents/ecomove/cvm/cvm/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "dcf"
+}

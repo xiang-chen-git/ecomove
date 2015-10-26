@@ -1,0 +1,67 @@
+data
+{
+  for (t in 1:numT) 
+  {
+    ones[t] <- 1
+  }
+}
+model
+{
+	for (t in 2:numT) 
+	{
+		# likelihood for steps 
+		step[t] ~ dweib(v[t], lambda[t]) 			# Weibull distriution for step length
+		
+		v[t] <- a[idx[t]]        					# shape parameter
+		lambda[t] <- pow(b[idx[t]], -a[idx[t]])		# scale parameter (transform between WinBUGS and R's definition of Weibull)
+		
+		# likelihood for turns. 
+		ones[t] ~ dbern(wc[t]) 
+		# Density function for Wrapped Cauchy distribution
+		wc[t] <- ( 1/(2*Pi) * (1 - rho.t[t] * rho.t[t]) / (1 + rho.t[t] * rho.t[t] - 2*rho.t[t] * cos(theta[t] - mu.t[t])) ) / 300 
+		
+		rho.t[t] <- rho[idx[t]]    	# mean cosine for the circular distribution
+		mu.t[t] <- mu[idx[t]]       # mean direction for turns
+		
+		# idx is the latent variable and the parameter index 
+		idx[t] ~ dcat(prob[t,])
+		
+		prob[t,1] <- p[idx[t-1]]	# prob[t,1] is the probability that the t-th observation corresponds to movement state 1
+		prob[t,2] <- (1 - p[idx[t-1]]) * phi[idx[t-1]]
+		prob[t,3] <- (1 - p[idx[t-1]]) * (1 - phi[idx[t-1]])
+	}
+	
+	####### priors on movement shape 
+	a[1] ~ dgamma(0.01, 0.01)
+	a[2] ~ dgamma(0.01, 0.01) 			
+	a[3] ~ dgamma(0.01, 0.01) 			
+	
+	####### priors on movement scale 
+	b[1] ~ dgamma(0.01, 0.01)
+	b[2] ~ dgamma(0.01, 0.01) 			
+	b[3] ~ dgamma(0.01, 0.01) 			
+	
+	###### priors for mean direction of turns 
+	mu[1] ~ dunif(-3*Pi/2, Pi/2) 
+	mu[2] ~ dunif(-3*Pi/2, Pi/2) 
+	mu[3] ~ dunif(-3*Pi/2, Pi/2) 
+	
+	###### priors for mean cosine of circular distribution 
+	rho[1] ~ dunif(0, 1)	   
+	rho[2] ~ dunif(0, 1)	   
+	rho[3] ~ dunif(0, 1)	   
+	
+	#### priors for transition probabilities
+	p[1] ~ dunif(0,1) 
+	p[2] ~ dunif(0,1)
+	p[3] ~ dunif(0,1)
+	phi[1] ~ dunif(0, 1)
+	phi[2] ~ dunif(0, 1)
+	phi[3] ~ dunif(0, 1)
+	
+	### asign state for first observation
+	idx[1] ~ dcat(phi[])		 
+	
+	
+	Pi <- 3.14159265359     # define π
+} 

@@ -1,0 +1,27 @@
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{Correlated velocity movement}
+
+\documentclass{article}
+\title{cvm vignettes}
+\author{xiang,elie}
+\date{\today}
+\begin{document}
+
+\maketitle 
+
+First, we loard the package:
+<<loading_cvm,warning=FALSE,message=FALSE>>=
+require(cvm)
+@
+Simulate and plot a CVM($\nu,\tau$?) process
+<<FirstPlot>>=
+nu <- 2
+tau <- 5
+dt <- .1 
+cvm <- CVM(nu, tau, Tmax = 1000, dt = dt)
+plot(cvm$Z, asp=1, type="l", main = "CVM(2,5)")
+title(sub = "0-1000 time units")
+@
+
+
+\end{document}

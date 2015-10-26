@@ -1,0 +1,16 @@
+{
+    "contents" : "Package: bcpa\nType: Package\nTitle: Behavioral change point analysis of animal movement\nVersion: 1.1\nDate: 2014-10-21\nAuthor: Eliezer Gurarie <eliezg@uw.edu>\nMaintainer: Eliezer Gurarie <eliezg@uw.edu>\nDescription: The Behavioral Change Point Analysis (BCPA) is a method of\n    identifying hidden shifts in the underlying parameters of a time series,\n    developed specifically to be applied to animal movement data which is\n    irregularly sampled.  The method is based on: E.\n    Gurarie, R. Andrews and K. Laidre A novel method for identifying\n    behavioural changes in animal movement data (2009) Ecology Letters 12:5\n    395-408.\nLicense: Unlimited\nDepends:\n    Rcpp (>= 0.10.2),\n    plyr\nLinkingTo: Rcpp\nSuggests:\n    knitr,\n    circular\nVignetteBuilder: knitr\n",
+    "created" : 1414895900586.000,
+    "dirty" : false,
+    "encoding" : "KOI8-R",
+    "folds" : "",
+    "hash" : "1997890844",
+    "id" : "9BB7FD3",
+    "lastKnownWriteTime" : 1414899045,
+    "path" : "~/programming/ecomove/bcpa/bcpa/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "dcf"
+}

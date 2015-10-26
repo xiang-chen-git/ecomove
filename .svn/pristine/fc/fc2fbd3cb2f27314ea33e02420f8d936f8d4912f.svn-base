@@ -1,0 +1,11 @@
+import(bcpa, plyr, adehabitatLT, mrw) 
+
+# only load the function "clusters" from package "intervals"
+importFrom(intervals, clusters)
+#importFrom(gplots, rich.colors)
+importFrom(CircStats, rwrpcauchy)
+
+S3method("plot","track")
+S3method("plot", "multipath")
+
+exportPattern("^[[:alpha:]]+")

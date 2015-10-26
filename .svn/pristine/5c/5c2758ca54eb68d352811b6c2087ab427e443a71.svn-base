@@ -1,0 +1,33 @@
+#' Estimating parameters of CVM
+#' 
+#' This is the grand function that estimates the nu, tau and (occasionally) v_0
+#' @usage estimateCVM <- function(Z, T, parameters = c("nu", "tau", "v0")[1:2], CI = FALSE, method = c("vaf", "crw", "onestep", "fullL", "crawl")[1], diagnose = FALSE, ...)
+#' @param Z location data in complex form (X + iY)
+#' @param T time of observations (NOTE: must be regularly spaced for methods "vaf" and "crw")
+#' @param method the method to use for the estimation.  See Gurarie et al. (in prep) for details of "vaf", "crw", "onestep", and "fullL" methods. The `crawl' is based on Johnson et al (2008) and is a wrapper for the \code{\link{crwMLE}}. 
+#' @param parameters which parameters to estimate.  for methods "vaf" and "crw" always "tau" and "nu" for, for one-step likelihood, always "tau" and possibly "nu", and always both for full-likelihood (with an optional "v0") and for the crawl method.
+#' @param CI whether or not to compute 95% confidence intervals for parameters. In some cases, this can make the computation much slower.
+#' @param spline whether or not to use the spline adjustment (only relevant for "vaf" and single-step likelihood methods).
+#' @param diagnose whether to draw a diagnostic plot.  Varies for different methods
+#' @param ... additional parameters to pass to estimation functions.  These are particularly involved in the "crawl" method (see \code{\link{crwMLE}}). 
+#' @return A data frame with point estimates of mean speed `nu' and time-scale `tau' 
+#' @example ./examples/estimateCVMexamples.r
+ 
+
+estimateCVM <- function(Z, T, method = c("vaf", "crw", "onestep", "fullL")[1], ...)
+{
+  if(method == "crw")
+    return(estimateCVM.crw(Z,T,...))
+    
+  if(method == "vaf")
+    return(estimateCVM.vaf(Z,T,...))
+  
+  if(method == "onestep")
+    return(estimateCVM.onestep(Z,T,...))
+  
+  if(method == "fullL")
+    return(estimateCVM.fullL(Z,T,...))
+  
+  if(method == "crawl")
+    return(estimateCVM.crawl(Z,T,...))
+}

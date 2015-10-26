@@ -1,0 +1,10 @@
+Package: waddle
+Type: Package
+Title: Waddle: What is the Animal Doing?
+Version: 0.11
+Date: 2013-05-15
+Author: Elie Gurarie, Chloe Bracis
+Maintainer:  <egurarie@umd.edu>
+Description: Comparative analysis of methods to identify different behavioral modes in animal movement, asking the question: "What is the animal doing?"
+License: Restricted pending data issues. 
+Depends: intervals, plyr, bcpa, adehabitatLT, mrw, scales

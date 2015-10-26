@@ -1,0 +1,16 @@
+{
+    "contents" : "#' Estimating parameters of CVM\n#' \n#' This is the grand function that estimates the nu, tau and (occasionally) v_0\n#' @usage estimateCVM <- function(Z, T, parameters = c(\"nu\", \"tau\", \"v0\")[1:2], CI = FALSE, method = c(\"vaf\", \"crw\", \"onestep\", \"fullL\", \"crawl\")[1], diagnose = FALSE, ...)\n#' @param Z location data in complex form (X + iY)\n#' @param T time of observations (NOTE: must be regularly spaced for methods \"vaf\" and \"crw\")\n#' @param method the method to use for the estimation.  See Gurarie et al. (in prep) for details of \"vaf\", \"crw\", \"onestep\", and \"fullL\" methods. The `crawl' is based on Johnson et al (2008) and is a wrapper for the \\code{\\link{crwMLE}}. \n#' @param parameters which parameters to estimate.  for methods \"vaf\" and \"crw\" always \"tau\" and \"nu\" for, for one-step likelihood, always \"tau\" and possibly \"nu\", and always both for full-likelihood (with an optional \"v0\") and for the crawl method.\n#' @param CI whether or not to compute 95\\% confidence intervals for parameters. In some cases, this can make the computation much slower.\n#' @param spline whether or not to use the spline adjustment (only relevant for \"vaf\" and single-step likelihood methods).\n#' @param diagnose whether to draw a diagnostic plot.  Varies for different methods\n#' @param ... additional parameters to pass to estimation functions.  These are particularly involved in the \"crawl\" method (see \\code{\\link{crwMLE}}). \n#' @return A data frame with point estimates of mean speed `nu' and time-scale `tau' \n#' @example ./examples/estimateCVMexamples.r\n \n\nestimateCVM <- \n  function(Z, T, method = c(\"vaf\", \"crw\", \"onestep\", \"fullL\")[1], ...)\n{\n  if(method == \"crw\")\n    return(estimateCVM.crw(Z,T,...))\n    \n  if(method == \"vaf\")\n    return(estimateCVM.vaf(Z,T,...))\n  \n  if(method == \"onestep\")\n    return(estimateCVM.onestep(Z,T,...))\n  \n  if(method == \"fullL\")\n    return(estimateCVM.fullL(Z,T,...))\n  \n  if(method == \"crawl\")\n    return(estimateCVM.crawl(Z,T,...))\n}\n",
+    "created" : 1419276619573.000,
+    "dirty" : false,
+    "encoding" : "WINDOWS-1252",
+    "folds" : "",
+    "hash" : "916561705",
+    "id" : "2DB7EEA5",
+    "lastKnownWriteTime" : 1419277884,
+    "path" : "~/Documents/ecomove/cvm/cvm/R/estimateCVM.r",
+    "project_path" : "R/estimateCVM.r",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,512 @@
+curve(sin(x), xlim=c(-pi/2,pi/2))
+curve(sin(x), xlim=c(-2*pi,2*pi), main="skepticism")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="scallop")
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="skepticism")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="scallopism")
+par(lwd = 2, col=2, bty="n")
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="skepticism")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="scallopism")
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2))
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="skepticism")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="scallopism")
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="skepticism")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="i feel like a scallop")
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), axes=FALSE, oma=c(0,0,5,0))
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="skepticism")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="i feel like a scallop")
+title("Trigonometric Emotions")
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), axes=FALSE, oma=c(0,0,5,0))
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="skepticism")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="i feel like a scallop")
+title("Trigonometric Emotions", outer=TRUE)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), axes=FALSE, oma=c(0,0,5,0))
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="i feel like a scallop")
+title("Trigonometric Emotions", outer=TRUE)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), axes=FALSE, oma=c(0,0,5,0), xaxt="n")
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="i feel like a scallop")
+title("Trigonometric Emotions", outer=TRUE)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(sin(x), xlim=c(-4*pi,4*pi), main="i feel like a scallop")
+title("Trigonometric Emotions", outer=TRUE)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(sin(x), xlim=c(-4*pi,4*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emotions", outer=TRUE)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="frown")
+curve(-sin(x), xlim=c(0,pi), main="smile")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emotions", outer=TRUE)
+title("Trigonometric Emoticons", outer=TRUE, cex=2)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=2)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=1)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.title=1)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=3)
+?title
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(sin(x), xlim=c(-pi/2,pi/2), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=3)
+?title
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=3)
+?title
+par(lwd = 2, col=2, bty="l", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=3)
+?title
+par(lwd = 2, line.col=2, bty="l", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=3)
+?title
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex=3)
+?title
+title("Trigonometric Emoticons", outer=TRUE, cex.main=3)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.main=2)
+?title
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0))
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.main=2)
+?title
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0))
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.main=2)
+?title
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0))
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.main=2)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.main=2)
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(x), xlim=c(-10*pi,10*pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.main=2)
+curve(-cos(x/pi), main="i'm not sure")
+curve(-cos(x/(2*pi)), xlim=c(0,pi), main="i'm not sure")
+curve(-cos(x/(2*pi)), main="i'm not sure")
+curve(-cos(x/(pi)), main="i'm not sure")
+curve(-cos(x/(2*pi)), main="i'm not sure")
+curve(cos(10*x), xlim=c(0,pi), main="i'm a scallop")
+curve(cos(20*x), xlim=c(0,pi), main="i'm a scallop")
+curve(cos(20*x), xlim=c(0,pi), ylim=c(-4,4), main="i'm a scallop")
+par(lwd = 2, col=2, bty="n", mfrow=c(2,2), oma=c(0,0,5,0), xaxt="n", yaxt="n")
+curve(sin(x), xlim=c(0,pi), main="i'm upset")
+curve(-sin(x), xlim=c(0,pi), main="i'm happy")
+curve(-cos(x), xlim=c(0,pi), main="i'm not sure")
+curve(cos(20*x), xlim=c(0,pi), ylim=c(-4,4), main="i'm a scallop")
+title("Trigonometric Emoticons", outer=TRUE, cex.main=2)
+v0.null <- diff(Z[1:2])/diff(T[1:2])
+v0x.null <- Re(v0.null)
+v0y.null <- Im(v0.null)
+tau.null <- mean(diff(T))
+nu.null <- mean(Mod(diff(Z))/diff(T))
+Z.fit <- optim(c(nu.null,tau.null,v0x.null,v0y.null), Z.like2D, Z=Re(Z[-1]), T=T[-1], hessian=TRUE,
+method = "L-BFGS-B", lower = c(0,0,-Inf), upper = c(Inf,Inf,Inf),
+control = list(fnscale = -1))
+Z.fit
+v0.null
+v0x.null <- Re(v0.null)
+v0y.null <- Im(v0.null)
+Z.like2D <-
+function(p, Z, T, v0=NULL)
+{
+nu <- p[1]
+tau <- p[2]
+if(is.null(v0)) { v0x <- p[3]; v0y <- p[4] }
+Sigma.zz <- getSigma.ZZ(T, nu, tau)
+mux <- v0x * tau*(1-exp(-T/tau))
+muy <- v0y * tau*(1-exp(-T/tau))
+dmvnorm2(Z,mux,Sigma.zz, log=TRUE) + dmvnorm2(Z,muy,Sigma.zz, log=TRUE)
+}
+Z.like2D
+Z.fit <- optim(c(nu.null,tau.null,v0x.null,v0y.null), Z.like2D, Z=Z[-1], T=T[-1], hessian=TRUE,
+method = "L-BFGS-B", lower = c(0,0,-Inf), upper = c(Inf,Inf,Inf),
+control = list(fnscale = -1))
+Z.fit
+Z.like2D
+Z.fit <- optim(c(nu.null,tau.null,v0x.null,v0y.null), Z.like2D, Z=Z[-1], T=T[-1], v0=TRUE, hessian=TRUE,
+method = "L-BFGS-B", lower = c(0,0,-Inf, -Inf), upper = c(Inf,Inf,Inf, Inf),
+control = list(fnscale = -1))
+Z.fit
+nu
+tay
+ta
+tau
+warnings90
+warnings()
+Z.like2D <-
+function(p, Z, T, v0=NULL)
+{
+nu <- p[1]
+tau <- p[2]
+if(is.null(v0)) { v0x <- p[3]; v0y <- p[4] }
+Sigma.zz <- getSigma.ZZ(T, nu, tau)
+mux <- v0x * tau*(1-exp(-T/tau))
+muy <- v0y * tau*(1-exp(-T/tau))
+dmvnorm2(Re(Z),mux,Sigma.zz, log=TRUE) + dmvnorm2(Im(Z),muy,Sigma.zz, log=TRUE)
+}
+Z.fit <- optim(c(nu.null,tau.null,v0x.null,v0y.null), Z.like2D, Z=Z[-1], T=T[-1], v0=TRUE, hessian=TRUE,
+method = "L-BFGS-B", lower = c(0,0,-Inf, -Inf), upper = c(Inf,Inf,Inf, Inf),
+control = list(fnscale = -1))
+Z.fit
+Z.fit <- optim(c(nu.null,tau.null), Z.like2D, Z=Z[-1], T=T[-1], hessian=TRUE,
+method = "L-BFGS-B", lower = c(0,0), upper = c(Inf,Inf),
+control = list(fnscale = -1))
+Z.like2D
+Z.like2D <-
+function(p, Z, T, v0=NULL)
+{
+nu <- p[1]
+tau <- p[2]
+if(is.null(v0)) { v0x <- p[3]; v0y <- p[4] } else{v0x <- Re(v0); v0y <- Im(v0)}
+Sigma.zz <- getSigma.ZZ(T, nu, tau)
+mux <- v0x * tau*(1-exp(-T/tau))
+muy <- v0y * tau*(1-exp(-T/tau))
+dmvnorm2(Re(Z),mux,Sigma.zz, log=TRUE) + dmvnorm2(Im(Z),muy,Sigma.zz, log=TRUE)
+}
+Z.fit <- optim(c(nu.null,tau.null), Z.like2D, Z=Z[-1], T=T[-1], v0 = v0.null, hessian=TRUE,
+method = "L-BFGS-B", lower = c(0,0), upper = c(Inf,Inf),
+control = list(fnscale = -1))
+Z.fit
+Z.fit$par
+nu
+nu.se <- sqrt(-1/Z.fit$hessian[1,1])
+nu.se
+qnorm(0.975)
+tau.hat <- Z.fit$par[2]
+tau.se <- sqrt(-1/Z.fit$hessian[2,2])
+tau.CI <- nu.hat + c(-1,1)*qnorm(0.975)*nu.se
+tau.hat <- Z.fit$par[2]
+tau.se <- sqrt(-1/Z.fit$hessian[2,2])
+tau.CI <- tau.hat + c(-1,1)*qnorm(0.975)*nu.se
+results <- data.frame(t(results), rbind(tau.CI, nu.CI))
+results <- data.frame(c(nu.hat, tau.hat)), rbind(tau.CI, nu.CI))
+results <- data.frame(c(nu.hat, tau.hat), rbind(tau.CI, nu.CI))
+nu.hat <- Z.fit$par[1]
+nu.se <- sqrt(-1/Z.fit$hessian[1,1])
+nu.CI <- nu.hat + c(-1,1)*qnorm(0.975)*nu.se
+# tau estimates
+tau.hat <- Z.fit$par[2]
+tau.se <- sqrt(-1/Z.fit$hessian[2,2])
+tau.CI <- tau.hat + c(-1,1)*qnorm(0.975)*nu.se
+# compile results
+results <- data.frame(c(nu.hat, tau.hat), rbind(tau.CI, nu.CI))
+results
+nu.se <- sqrt(-1/Z.fit$hessian[1,1])
+nu.se
+# nu estimates
+nu.hat <- Z.fit$par[1]
+nu.se <- sqrt(-1/Z.fit$hessian[1,1])
+nu.CI <- nu.hat + c(-1,1)*qnorm(0.975)*nu.se
+# tau estimates
+tau.hat <- Z.fit$par[2]
+tau.se <- sqrt(-1/Z.fit$hessian[2,2])
+tau.CI <- tau.hat + c(-1,1)*qnorm(0.975)*tau.se
+# compile results
+results <- data.frame(c(nu.hat, tau.hat), rbind(tau.CI, nu.CI))
+row.names(results) <- c("tau", "nu")
+names(results) <- c("Estimate", "C.I.low", "C.I.high")
+results
+v0y.hat <- Z.fit$par[4]
+v0y.se <- sqrt(-1/Z.fit$hessian[4,4])
+v0y.CI <- v0y.hat + c(-1,1)*qnorm(0.975)*v0y.se
+Z.fit$par
+Z.fit$par[4]
+Z.fit <- optim(c(nu.null,tau.null,v0x.null,v0y.null), Z.like2D, Z=Z[-1], T=T[-1], v0=TRUE, hessian=TRUE,
+method = "L-BFGS-B", lower = c(0,0,-Inf, -Inf), upper = c(Inf,Inf,Inf, Inf),
+control = list(fnscale = -1))
+Z.fit
+v0x.hat <- Z.fit$par[3]
+v0x.se <- sqrt(-1/Z.fit$hessian[3,3])
+v0x.se
+v0x.CI <- v0x.hat + c(-1,1)*qnorm(0.975)*v0x.se
+v0y.hat <- Z.fit$par[4]
+v0y.se <- sqrt(-1/Z.fit$hessian[4,4])
+v0y.CI <- v0y.hat + c(-1,1)*qnorm(0.975)*v0y.se
+results <- rbind(results,
+v0x = c(v0x.hat, v0x.CI),
+v0y = c(v0y.hat, v0y.CI))
+results
+t(results[,1])
+results <- data.frame(t(results[,1]))
+results
+data.frame(t(results[,1]))
+nu.hat <- Z.fit$par[1]
+nu.se <- sqrt(-1/Z.fit$hessian[1,1])
+nu.CI <- nu.hat + c(-1,1)*qnorm(0.975)*nu.se
+# tau estimates
+tau.hat <- Z.fit$par[2]
+tau.se <- sqrt(-1/Z.fit$hessian[2,2])
+tau.CI <- tau.hat + c(-1,1)*qnorm(0.975)*tau.se
+# compile results
+results <- data.frame(c(nu.hat, tau.hat), rbind(tau.CI, nu.CI))
+row.names(results) <- c("tau", "nu")
+names(results) <- c("Estimate", "C.I.low", "C.I.high")
+data.frame(t(results[,1]))
+# v0x estimates
+v0x.hat <- Z.fit$par[3]
+v0x.se <- sqrt(-1/Z.fit$hessian[3,3])
+v0x.CI <- v0x.hat + c(-1,1)*qnorm(0.975)*v0x.se
+# v0y estimates
+v0y.hat <- Z.fit$par[4]
+v0y.se <- sqrt(-1/Z.fit$hessian[4,4])
+v0y.CI <- v0y.hat + c(-1,1)*qnorm(0.975)*v0y.se
+results <- rbind(results,
+v0x = c(v0x.hat, v0x.CI),
+v0y = c(v0y.hat, v0y.CI))
+results <- data.frame(t(results[,1]))
+results
+# v0x estimates
+v0x.hat <- Z.fit$par[3]
+v0x.se <- sqrt(-1/Z.fit$hessian[3,3])
+v0x.CI <- v0x.hat + c(-1,1)*qnorm(0.975)*v0x.se
+# v0y estimates
+v0y.hat <- Z.fit$par[4]
+v0y.se <- sqrt(-1/Z.fit$hessian[4,4])
+v0y.CI <- v0y.hat + c(-1,1)*qnorm(0.975)*v0y.se
+results <- rbind(results,
+v0x = c(v0x.hat, v0x.CI),
+v0y = c(v0y.hat, v0y.CI))
+results
+# nu estimates
+nu.hat <- Z.fit$par[1]
+nu.se <- sqrt(-1/Z.fit$hessian[1,1])
+nu.CI <- nu.hat + c(-1,1)*qnorm(0.975)*nu.se
+# tau estimates
+tau.hat <- Z.fit$par[2]
+tau.se <- sqrt(-1/Z.fit$hessian[2,2])
+tau.CI <- tau.hat + c(-1,1)*qnorm(0.975)*tau.se
+# compile results
+results <- data.frame(c(nu.hat, tau.hat), rbind(tau.CI, nu.CI))
+row.names(results) <- c("tau", "nu")
+names(results) <- c("Estimate", "C.I.low", "C.I.high")
+# v0x estimates
+v0x.hat <- Z.fit$par[3]
+v0x.se <- sqrt(-1/Z.fit$hessian[3,3])
+v0x.CI <- v0x.hat + c(-1,1)*qnorm(0.975)*v0x.se
+# v0y estimates
+v0y.hat <- Z.fit$par[4]
+v0y.se <- sqrt(-1/Z.fit$hessian[4,4])
+v0y.CI <- v0y.hat + c(-1,1)*qnorm(0.975)*v0y.se
+results <- rbind(results,
+v0x = c(v0x.hat, v0x.CI),
+v0y = c(v0y.hat, v0y.CI))
+results
+data.frame(t(results[,1]), names=row.names(results))
+?data.frame
+results
+t(results)
+t(results)[1,]
+library(cvm)
+rm(Z.like2D)
+library(cvm)
+library(cvm)
+data(CVMstan2D)
+iter=1000
+chains=4
+CVM.model
+data(CVMstan2D)
+data(CVMstan2D)
+CVM.fit <- sampling(CVMstan2D, data = CVM.data, iter = iter, pars=c("tau", "nu"), chains = chains)
+CVM.data <- list(N = length(Z)-1, XY = c(Re(Z)[-1], Im(Z)[-1]), T=T[-1], v0x=Re(v0), v0y = Im(v0))
+CVM.fit <- sampling(CVMstan2D, data = CVM.data, iter = iter, pars=c("tau", "nu"), chains = chains)
+CVM.fit
+tau.sim <- CVM.fit@sim$samples[[1]]$tau
+length(tau.sim)
+iter
+tau.sim[round(iter/2):iter]
+quantile(tau.sim[round(iter/2):iter])
+CVM.fit
+mean(tau.sim[round(iter/2):iter])
+tau.CI <- quantile(tau.sim[round(iter/2):iter], c(0.025, 0.975))
+tau.CI
+tau.CI <- quantile(tau.sim[round(iter/5):iter], c(0.025, 0.975))
+tau.CI
+plot(tau.sim, type="l")
+hist(tau.sim[-(1:100)], col="grey", bor="darkgrey")
+abline(v=quantile(tau.sim[-(1:100)]), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(nu.sim, type="l")
+hist(nu.sim[-(1:100)], col="grey", bor="darkgrey")
+abline(v=quantile(nu.sim[-(1:100)]), lty=c(3,2,1,2,3), col=2, lwd=2)
+layout(rbind(c(1,1,2),c(3,3,4)))
+tau.sim <- CVM.fit@sim$samples[[1]]$tau
+nu.sim <- CVM.fit@sim$samples[[1]]$nu
+plot(tau.sim, type="l")
+hist(tau.sim[-(1:100)], col="grey", bor="darkgrey")
+abline(v=quantile(tau.sim[-(1:100)]), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(nu.sim, type="l")
+hist(nu.sim[-(1:100)], col="grey", bor="darkgrey")
+abline(v=quantile(nu.sim[-(1:100)]), lty=c(3,2,1,2,3), col=2, lwd=2)
+layout(rbind(c(1,1,2),c(3,3,4)))
+tau.sim <- CVM.fit@sim$samples[[1]]$tau
+nu.sim <- CVM.fit@sim$samples[[1]]$nu
+plot(tau.sim, type="l")
+hist(tau.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(tau.sim[50:iter]), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(nu.sim, type="l")
+hist(nu.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(nu.sim[50:iter]), lty=c(3,2,1,2,3), col=2, lwd=2)
+par(bty="l")
+tau.sim <- CVM.fit@sim$samples[[1]]$tau
+nu.sim <- CVM.fit@sim$samples[[1]]$nu
+plot(tau.sim, type="l")
+hist(tau.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(tau.sim[50:iter]), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(nu.sim, type="l")
+hist(nu.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(nu.sim[50:iter]), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(tau.sim, type="l", main="tau chain")
+hist(tau.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(tau.sim[50:iter]), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(nu.sim, type="l", main="nu chain"
+hist(nu.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(nu.sim[50:iter]), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(nu.sim, type="l", main="nu chain")
+hist(nu.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(nu.sim[50:iter]), lty=c(3,2,1,2,3), col=2, lwd=2)
+quantile
+layout(rbind(c(1,1,2),c(3,3,4)))
+par(bty="l")
+tau.sim <- CVM.fit@sim$samples[[1]]$tau
+nu.sim <- CVM.fit@sim$samples[[1]]$nu
+p <- c(0.025, 0.25, 0.5, 0.75, 0.975)
+plot(tau.sim, type="l", main="tau chain")
+hist(tau.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(tau.sim[50:iter], p), lty=c(3,2,1,2,3), col=2, lwd=2)
+plot(nu.sim, type="l", main="nu chain")
+hist(nu.sim[50:iter], col="grey", bor="darkgrey")
+abline(v=quantile(nu.sim[50:iter], p), lty=c(3,2,1,2,3), col=2, lwd=2)
+tau.hat <- mean(tau.sim[50:iter])
+tau.CI <- quantile(tau.sim[50:iter], c(0.025, 0.975))
+tau.sim <- CVM.fit@sim$samples[[1]]$tau
+tau.hat <- mean(tau.sim[50:iter])
+tau.CI <- quantile(tau.sim[50:iter], c(0.025, 0.975))
+nu.sim <- CVM.fit@sim$samples[[1]]$nu
+nu.hat <- mean(nu.sim[50:iter])
+nu.CI <- quantile(nu.sim[50:iter], c(0.025, 0.975))
+results <- data.frame(rbind(c(tau.hat, tau.CI), c(nu.hat, nu.CI)))
+results
+library(cvm)
+library(cvm)
+CVM.fit <- NULL
+rm(a)
+plot(a)
+try(plot(a))
+a <- try(plot(a))
+a
+is(a)
+CVM.fit <- NULL
+is(CVM.fit) != try.error
+is(CVM.fit) != "try.error"
+CVM.fit
+is(a) == "try.error"
+is(a) == "try-error"
+is(CVM.fit) != "try-error"
+is(CVM.fit)[1] != "try-error"
+library(cvm)
+library(cvm)
+library(cvm)
+library(cvm)
+library(cvm)
+CVM.fit <- try( sampling(CVMstan2D, data = CVM.data, iter = iter, pars=c("tau", "nu"), chains = chains))
+chains <- 1
+item <- 200
+CVM.fit <- try(sampling(CVMstan2D, data = CVM.data, iter = iter, pars=c("tau", "nu"), chains = chains))
+iter
+iter <- 200
+CVM.fit <- try(sampling(CVMstan2D, data = CVM.data, iter = iter, pars=c("tau", "nu"), chains = chains))
+is(CVM.fit)[1] != "try-error"
+if(is(CVM.fit)[1] != "try-error") break()
+library(cvm)
+library(cvm)
+setwd("c:/eli/programming/cvm/R")
+require(rstan)
+system.time(CVMstan2D <- stan_model(file = "../STAN/cvmlikelihood2D.stan"))
+system.time(CVMstan2D <- stan_model(file = "/cvmlikelihood2D.stan"))
+system.time(CVMstan2D <- stan_model(file = "cvmlikelihood2D.stan"))
+save(CVMstan2D, file="../cvm/data/CVMstan2D.Rda")
+library(cvm)
+CVM.fit
+source('~/programming/cvm/cvm/R/diagnoseSTANfit.R', echo=TRUE)
+diagnoseSTANfit(CVM.fit)
